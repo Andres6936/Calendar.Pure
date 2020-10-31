@@ -186,11 +186,11 @@ function Calendar(settings) {
 
     for (const element of yearSwitcher.getElementsByTagName('i')) {
         element.onclick = function () {
-            var m = $('.dr-month-switcher span', self.element).data('month');
-            var y = $('.dr-year-switcher span', self.element).data('year');
-            var this_moment = moment([y, m, 1]);
-            var back = this_moment.clone().subtract(1, 'year');
-            var forward = this_moment.clone().add(1, 'year').startOf('day');
+            const m = $('.dr-month-switcher span', self.element).data('month');
+            const y = $('.dr-year-switcher span', self.element).data('year');
+            const this_moment = moment([y, m, 1]);
+            const back = this_moment.clone().subtract(1, 'year');
+            const forward = this_moment.clone().add(1, 'year').startOf('day');
 
             if ($(this).hasClass('dr-left')) {
                 self.calendarOpen(self.selected, back);
