@@ -2,6 +2,9 @@
 
 import 'https://code.jquery.com/jquery-3.3.1.min.js';
 
+// Moment.js 2.29.1
+import 'https://momentjs.com/downloads/moment.js'
+
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
