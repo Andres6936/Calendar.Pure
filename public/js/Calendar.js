@@ -192,9 +192,9 @@ function Calendar(settings) {
             const back = this_moment.clone().subtract(1, 'year');
             const forward = this_moment.clone().add(1, 'year').startOf('day');
 
-            if ($(this).hasClass('dr-left')) {
+            if (this.classList.contains('dr-left')) {
                 self.calendarOpen(self.selected, back);
-            } else if ($(this).hasClass('dr-right')) {
+            } else if (this.classList.contains('dr-right')) {
                 self.calendarOpen(self.selected, forward);
             }
         }
