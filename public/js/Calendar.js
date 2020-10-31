@@ -180,20 +180,25 @@ function Calendar(settings) {
         }
     });
 
-    $('.dr-year-switcher i', this.element).click(function () {
-        var m = $('.dr-month-switcher span', self.element).data('month');
-        var y = $('.dr-year-switcher span', self.element).data('year');
-        var this_moment = moment([y, m, 1]);
-        var back = this_moment.clone().subtract(1, 'year');
-        var forward = this_moment.clone().add(1, 'year').startOf('day');
+    // Only exist a year-switcher for each calendar
+    // @type {HTMLElement}
+    const yearSwitcher = this.element[0].getElementsByClassName('dr-year-switcher')[0];
 
+    for (let element of yearSwitcher.getElementsByTagName('i')) {
+        element.onclick = function () {
+            var m = $('.dr-month-switcher span', self.element).data('month');
+            var y = $('.dr-year-switcher span', self.element).data('year');
+            var this_moment = moment([y, m, 1]);
+            var back = this_moment.clone().subtract(1, 'year');
+            var forward = this_moment.clone().add(1, 'year').startOf('day');
 
-        if ($(this).hasClass('dr-left')) {
-            self.calendarOpen(self.selected, back);
-        } else if ($(this).hasClass('dr-right')) {
-            self.calendarOpen(self.selected, forward);
+            if ($(this).hasClass('dr-left')) {
+                self.calendarOpen(self.selected, back);
+            } else if ($(this).hasClass('dr-right')) {
+                self.calendarOpen(self.selected, forward);
+            }
         }
-    });
+    }
 
     $('.dr-dates-dash', this.element).click(function () {
         $('.dr-date-start', self.element).trigger('click');
