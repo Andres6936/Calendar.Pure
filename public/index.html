@@ -1,103 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 
-  <title>Baremetrics Date Range Picker</title>
+    <title>Baremetrics Date Range Picker</title>
 
-  <link rel="stylesheet" href="css/application.css" />
-  <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/application.css"/>
+    <link rel="stylesheet" href="css/home.css"/>
 
-  <script src="js/vendor/jquery.js"></script>
-  <script src="js/vendor/moment.js"></script>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/moment.js"></script>
 </head>
 <body>
-  <h1><a href="https://baremetrics.com">Baremetrics</a> Date Range Picker</h1>
+<h1><a href="https://baremetrics.com">Baremetrics</a> Date Range Picker</h1>
 
-  <div class="daterange daterange--double one"></div>
+<div class="daterange daterange--double one"></div>
 
-  <div class="daterange daterange--double two"></div>
+<div class="daterange daterange--double two"></div>
 
-  <div class="daterange daterange--double three"></div>
+<div class="daterange daterange--double three"></div>
 
-  <div class="daterange daterange--single"></div>
+<div class="daterange daterange--single"></div>
 
-  <footer>
+<footer>
     <a href="https://github.com/Baremetrics/calendar">Github</a>
-  </footer>
+</footer>
 
-  <script type="module" src="js/Calendar.js"></script>
-  <script type="module">
+<script type="module" src="js/Calendar.js"></script>
+<script type="module">
 
     import {Calendar} from './js/Calendar.js'
 
     new Calendar({
-      element: $('.daterange--single'),
-      format: {input: 'M/D/YYYY'},
-      placeholder: 'Select a Date',
-      required: false,
-      callback: function () {
-        console.log('Single calendar callback triggered');
-      }
+        element: $('.daterange--single'),
+        format: {input: 'M/D/YYYY'},
+        placeholder: 'Select a Date',
+        required: false,
+        callback: function () {
+            console.log('Single calendar callback triggered');
+        }
     });
 
     new Calendar({
-      element: $('.one'),
-      earliest_date: '2000-01-01',
-      latest_date: moment(),
-      start_date: moment().subtract(29, 'days'),
-      end_date: moment(),
-      callback: function () {
-        var start = moment(this.start_date).format('ll'),
+        element: $('.one'),
+        earliest_date: '2000-01-01',
+        latest_date: moment(),
+        start_date: moment().subtract(29, 'days'),
+        end_date: moment(),
+        callback: function () {
+            var start = moment(this.start_date).format('ll'),
                 end = moment(this.end_date).format('ll');
 
-        console.debug('Start Date: ' + start + '\nEnd Date: ' + end);
-      }
+            console.debug('Start Date: ' + start + '\nEnd Date: ' + end);
+        }
     });
 
     new Calendar({
-      element: $('.two'),
-      earliest_date: '2000-01-01',
-      latest_date: moment(),
-      start_date: moment().subtract(29, 'days'),
-      end_date: moment(),
-      presets: false,
-      callback: function() {
-        var start = moment(this.start_date).format('ll'),
+        element: $('.two'),
+        earliest_date: '2000-01-01',
+        latest_date: moment(),
+        start_date: moment().subtract(29, 'days'),
+        end_date: moment(),
+        presets: false,
+        callback: function () {
+            var start = moment(this.start_date).format('ll'),
                 end = moment(this.end_date).format('ll');
 
-        console.debug('Start Date: '+ start +'\nEnd Date: '+ end);
-      }
+            console.debug('Start Date: ' + start + '\nEnd Date: ' + end);
+        }
     });
 
     new Calendar({
-      element: $('.three'),
-      earliest_date: '2000-01-01',
-      latest_date: moment(),
-      start_date: moment().subtract(29, 'days'),
-      end_date: moment(),
-      presets: [{
-        label: 'Last 30 days',
-        start: moment().subtract(29, 'days'),
-        end: moment()
-      },{
-        label: 'Last month',
-        start: moment().subtract(1, 'month').startOf('month'),
-        end: moment().subtract(1, 'month').endOf('month')
-      },{
-        label: 'Last year',
-        start: moment().subtract(1, 'year').startOf('year'),
-        end: moment().subtract(1, 'year').endOf('year')
-      }],
-      callback: function() {
-        var start = moment(this.start_date).format('ll'),
+        element: $('.three'),
+        earliest_date: '2000-01-01',
+        latest_date: moment(),
+        start_date: moment().subtract(29, 'days'),
+        end_date: moment(),
+        presets: [{
+            label: 'Last 30 days',
+            start: moment().subtract(29, 'days'),
+            end: moment()
+        }, {
+            label: 'Last month',
+            start: moment().subtract(1, 'month').startOf('month'),
+            end: moment().subtract(1, 'month').endOf('month')
+        }, {
+            label: 'Last year',
+            start: moment().subtract(1, 'year').startOf('year'),
+            end: moment().subtract(1, 'year').endOf('year')
+        }],
+        callback: function () {
+            var start = moment(this.start_date).format('ll'),
                 end = moment(this.end_date).format('ll');
 
-        console.debug('Start Date: '+ start +'\nEnd Date: '+ end);
-      }
+            console.debug('Start Date: ' + start + '\nEnd Date: ' + end);
+        }
     });
 
-  </script>
+</script>
 </body>
 </html>
