@@ -26,7 +26,7 @@
         this.selected = null;
 
         this.type = this.element.hasClass('daterange--single') ? 'single' : 'double';
-        this.required = settings.required == false ? false : true;
+        this.required = settings.required !== false;
 
         this.format = settings.format || {};
         this.format.input = settings.format && settings.format.input || 'MMMM D, YYYY';
@@ -36,7 +36,7 @@
 
         this.placeholder = settings.placeholder || this.format.input;
 
-        this.days_array = settings.days_array && settings.days_array.length == 7 ?
+        this.days_array = settings.days_array && settings.days_array.length === 7 ?
             settings.days_array : moment.weekdaysMin();
 
         this.orig_start_date = null;
@@ -48,13 +48,13 @@
         this.latest_date = settings.latest_date ? moment(settings.latest_date)
             : moment('2900-12-31', 'YYYY-MM-DD');
         this.end_date = settings.end_date ? moment(settings.end_date)
-            : (this.type == 'double' ? moment() : null);
+            : (this.type === 'double' ? moment() : null);
         this.start_date = settings.start_date ? moment(settings.start_date)
-            : (this.type == 'double' ? this.end_date.clone().subtract(1, 'month') : null);
+            : (this.type === 'double' ? this.end_date.clone().subtract(1, 'month') : null);
         this.current_date = settings.current_date ? moment(settings.current_date)
-            : (this.type == 'single' ? moment() : null);
+            : (this.type === 'single' ? moment() : null);
 
-        this.presets = settings.presets == false || this.type == 'single' ? false : true;
+        this.presets = settings.presets === false || this.type === 'single' ? false : true;
 
         this.callback = settings.callback || this.calendarSetDates;
 
