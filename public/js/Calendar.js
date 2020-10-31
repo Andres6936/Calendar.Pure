@@ -41,7 +41,7 @@ function Calendar(settings) {
     this.current_date = settings.current_date ? moment(settings.current_date)
         : (this.type === 'single' ? moment() : null);
 
-    this.presets = settings.presets === false || this.type === 'single' ? false : true;
+    this.presets = !(settings.presets === false || this.type === 'single');
 
     this.callback = settings.callback || this.calendarSetDates;
 
