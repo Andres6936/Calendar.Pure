@@ -32,27 +32,27 @@
 
     import {Calendar} from './js/Calendar.js'
 
-    var ss = new Calendar({
+    new Calendar({
       element: $('.daterange--single'),
       format: {input: 'M/D/YYYY'},
       placeholder: 'Select a Date',
       required: false,
-      callback: function() {
+      callback: function () {
         console.log('Single calendar callback triggered');
       }
     });
 
-    var dd = new Calendar({
+    new Calendar({
       element: $('.one'),
       earliest_date: '2000-01-01',
       latest_date: moment(),
       start_date: moment().subtract(29, 'days'),
       end_date: moment(),
-      callback: function() {
+      callback: function () {
         var start = moment(this.start_date).format('ll'),
                 end = moment(this.end_date).format('ll');
 
-        console.debug('Start Date: '+ start +'\nEnd Date: '+ end);
+        console.debug('Start Date: ' + start + '\nEnd Date: ' + end);
       }
     });
 
