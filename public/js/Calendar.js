@@ -76,8 +76,9 @@ function Calendar(settings) {
          *  the keyboard.
          */
         'keyup': function (event) {
-            if (event.code === 9 && !this.calIsOpen && !this.start_date && !this.end_date)
-                this.calendarOpen(this);
+            console.log('Keyup');
+            if (event.code === 9 && !self.calIsOpen && !self.start_date && !self.end_date)
+                self.calendarOpen(this);
         },
 
         'keydown': function (event) {
