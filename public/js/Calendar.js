@@ -81,6 +81,13 @@ function Calendar(settings) {
                 self.calendarOpen(this);
         },
 
+        /**
+         *
+         * @param event KeyboardEvent: objects describe a user interaction with
+         *  the keyboard; each event describes a single interaction between
+         *  the user and a key (or combination of a key with modifier keys) on
+         *  the keyboard.
+         */
         'keydown': function (event) {
             switch (event.keyCode) {
 
