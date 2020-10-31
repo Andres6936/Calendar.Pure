@@ -9,10 +9,14 @@ function Calendar(settings) {
     this.presetIsOpen = false;
     this.sameDayRange = settings.same_day_range || false;
 
+    /**
+     * @type {HTMLElement} Element of type divisor.
+     */
     this.element = settings.element || $('.daterange');
     this.selected = null;
 
-    this.type = this.element.hasClass('daterange--single') ? 'single' : 'double';
+    this.type = this.element[0].classList.contains('daterange--single') ? 'single' : 'double';
+
     this.required = settings.required !== false;
 
     this.format = settings.format || {};
