@@ -1,22 +1,5 @@
 'use strict';
 
-import 'https://code.jquery.com/jquery-3.3.1.min.js';
-
-// Moment.js 2.29.1
-import 'https://momentjs.com/downloads/moment.js'
-
-(function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['jquery', 'moment'], factory);
-    } else if (typeof exports === 'object') {
-        // Node/CommonJS
-        module.exports = factory(require('jquery'), require('moment'));
-    }
-}(this, function ($, moment) {
-
-}));
-
 function Calendar(settings) {
     var self = this;
 
