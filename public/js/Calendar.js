@@ -69,7 +69,7 @@ function Calendar(settings) {
         },
 
         'keyup': function (event) {
-            if (event.keyCode == 9 && !self.calIsOpen && !self.start_date && !self.end_date)
+            if (event.keyCode === 9 && !self.calIsOpen && !self.start_date && !self.end_date)
                 self.calendarOpen(this);
         },
 
