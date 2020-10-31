@@ -440,10 +440,10 @@ Calendar.prototype.calendarOpen = function (selected, switcher) {
 
     this.selected = selected || this.selected;
 
-    if (this.presetIsOpen == true)
+    if (this.presetIsOpen === true)
         this.presetToggle();
 
-    if (this.calIsOpen == true) {
+    if (this.calIsOpen === true) {
         this.calendarClose(switcher ? 'switcher' : undefined);
     } else if ($(this.selected).html().length) {
         this.orig_start_date = this.start_date;
@@ -523,7 +523,7 @@ Calendar.prototype.calendarOpen = function (selected, switcher) {
                     if (!next)
                         next = curr;
 
-                    if (type == 'start') {
+                    if (type === 'start') {
                         if (moment(next).isSame(self.end_date) || (self.sameDayRange && moment(curr).isSame(self.end_date)))
                             return false;
 
@@ -538,7 +538,7 @@ Calendar.prototype.calendarOpen = function (selected, switcher) {
                         }
 
                         selected = selected.next().addClass('dr-maybe');
-                    } else if (type == 'end') {
+                    } else if (type === 'end') {
                         if (moment(prev).isSame(self.start_date) || (self.sameDayRange && moment(curr).isSame(self.start_date)))
                             return false;
 
