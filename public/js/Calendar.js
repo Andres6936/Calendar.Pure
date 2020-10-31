@@ -5,12 +5,21 @@ function Calendar(settings) {
 
     this.settings = settings;
 
+    /**
+     * @type {boolean}
+     */
     this.calIsOpen = false;
+
+    /**
+     * @type {boolean}
+     */
     this.presetIsOpen = false;
+
     this.sameDayRange = settings.same_day_range || false;
 
     /**
-     * @type {HTMLElement} Element of type divisor.
+     * Element of type divisor.
+     * @type {HTMLElement}
      */
     this.element = settings.element || $('.daterange');
     this.selected = null;
