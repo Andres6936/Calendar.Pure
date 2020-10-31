@@ -184,7 +184,7 @@ function Calendar(settings) {
     // @type {HTMLElement}
     const yearSwitcher = this.element[0].getElementsByClassName('dr-year-switcher')[0];
 
-    for (let element of yearSwitcher.getElementsByTagName('i')) {
+    for (const element of yearSwitcher.getElementsByTagName('i')) {
         element.onclick = function () {
             var m = $('.dr-month-switcher span', self.element).data('month');
             var y = $('.dr-year-switcher span', self.element).data('year');
