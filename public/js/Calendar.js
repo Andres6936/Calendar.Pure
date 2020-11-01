@@ -3,6 +3,9 @@
 function Calendar(settings) {
     var self = this;
 
+    /**
+     * @type {Object}
+     */
     this.settings = settings;
 
     /**
@@ -19,13 +22,23 @@ function Calendar(settings) {
 
     /**
      * Element of type divisor.
-     * @type {HTMLElement}
+     * @type {HTMLCollection}
      */
     this.element = settings.element || $('.daterange');
+
+    /**
+     * @type {HTMLElement|null}
+     */
     this.selected = null;
 
+    /**
+     * @type {string}
+     */
     this.type = this.element[0].classList.contains('daterange--single') ? 'single' : 'double';
 
+    /**
+     * @type {boolean}
+     */
     this.required = settings.required !== false;
 
     this.format = settings.format || {};
