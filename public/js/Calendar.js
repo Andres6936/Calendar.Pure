@@ -1,26 +1,47 @@
 'use strict';
 
-/**
- * Wrapper around of selector of elements with specify class name and filter
- * of elements with the tag name.
- *
- * This method is created with the intention of replace the function of jQuery
- * that filter for class name and return the collection of elements with the
- * tag specified.
- *
- * Equivalent jQuery: $('className' 'tagName')
- *
- * @param element {HTMLElement} Where the elements will be searched.
- * @param className {string} Name of class that filter the elements.
- * @param tagName {string} Name of tag for filter the elements.
- * @return {HTMLCollection} Collection of elements.
- */
-function getElementsBySelectionOfClass(element, className, tagName) {
-    console.assert(typeof className === 'string');
-    console.assert(typeof tagName === 'string');
+class SelectorHTML {
+    // Properties
 
-    const selection = element.getElementsByClassName(className)[0];
-    return selection.getElementsByTagName(tagName);
+    /**
+     * @type {HTMLElement} Reference private to Html Element
+     */
+    #element = undefined
+
+    // Construct
+
+    /**
+     * @param _element {HTMLElement} Reference to Html Element
+     */
+    constructor(_element) {
+        console.assert(typeof _element === 'object');
+
+        this.#element = _element
+    }
+
+    // Methods
+
+    /**
+     * Wrapper around of selector of elements with specify class name and filter
+     * of elements with the tag name.
+     *
+     * This method is created with the intention of replace the function of jQuery
+     * that filter for class name and return the collection of elements with the
+     * tag specified.
+     *
+     * Equivalent jQuery: $('className' 'tagName')
+     *
+     * @param className {string} Name of class that filter the elements.
+     * @param tagName {string} Name of tag for filter the elements.
+     * @return {HTMLCollection} Collection of elements.
+     */
+    getElementsBySelectionOfClass(className, tagName) {
+        console.assert(typeof className === 'string');
+        console.assert(typeof tagName === 'string');
+
+        const selection = this.#element.getElementsByClassName(className)[0];
+        return selection.getElementsByTagName(tagName);
+    }
 }
 
 function Calendar(settings) {
@@ -219,7 +240,9 @@ function Calendar(settings) {
         }
     });
 
-    for (const element of getElementsBySelectionOfClass(this.element[0], 'dr-year-switcher', 'i')) {
+    const selector = new SelectorHTML(this.element[0]);
+
+    for (const element of selector.getElementsBySelectionOfClass('dr-year-switcher', 'i')) {
         element.onclick = function () {
             const m = $('.dr-month-switcher span', self.element).data('month');
             const y = $('.dr-year-switcher span', self.element).data('year');
