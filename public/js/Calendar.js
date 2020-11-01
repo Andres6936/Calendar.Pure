@@ -16,6 +16,9 @@
  * @return {HTMLCollection} Collection of elements.
  */
 function getElementsBySelectionOfClass(element, className, tagName) {
+    console.assert(typeof className === 'string');
+    console.assert(typeof tagName === 'string');
+
     const selection = element.getElementsByClassName(className)[0];
     return selection.getElementsByTagName(tagName);
 }
@@ -216,11 +219,7 @@ function Calendar(settings) {
         }
     });
 
-    // Only exist a year-switcher for each calendar
-    // @type {HTMLElement}
-    const yearSwitcher = this.element[0].getElementsByClassName('dr-year-switcher')[0];
-
-    for (const element of yearSwitcher.getElementsByTagName('i')) {
+    for (const element of getElementsBySelectionOfClass(this.element[0], 'dr-year-switcher', 'i')) {
         element.onclick = function () {
             const m = $('.dr-month-switcher span', self.element).data('month');
             const y = $('.dr-year-switcher span', self.element).data('year');
