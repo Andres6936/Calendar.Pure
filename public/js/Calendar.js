@@ -45,6 +45,18 @@ class SelectorHTML {
         const selection = this.#element.getElementsByClassName(className)[0];
         return selection.getElementsByTagName(tagName);
     }
+
+    /**
+     * @param className {string}
+     * @throws Error If the element with the class not exist.
+     * @return {HTMLElement}
+     */
+    getFirstByClass(className) {
+        // @type {HTMLCollectionOf<HTMLElement>}
+        const result = this.#element.getElementsByClassName(className);
+        if (result.length === 0) throw new Error('Empty Collection');
+        return result[0];
+    }
 }
 
 function Calendar(settings) {
@@ -123,9 +135,16 @@ function Calendar(settings) {
 
     this.calendarHTML(this.type);
 
-    $('.dr-presets', this.element).click(function () {
-        self.presetToggle();
-    });
+    // Wrapper to class, for reduce the dependency of jQuery
+    const selector = new SelectorHTML(this.element[0]);
+
+    try {
+        selector.getFirstByClass('dr-presets').onclick = function () {
+            self.presetToggle();
+        }
+    } catch (ignored) {
+
+    }
 
     $('.dr-list-item', this.element).click(function () {
         var start = $('.dr-item-aside', this).data('start');
@@ -242,8 +261,6 @@ function Calendar(settings) {
             self.calendarOpen(self.selected, forward);
         }
     });
-
-    const selector = new SelectorHTML(this.element[0]);
 
     for (const element of selector.filterClassGetByTag('dr-year-switcher', 'i')) {
         element.onclick = function () {
