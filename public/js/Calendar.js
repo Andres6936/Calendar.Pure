@@ -1,5 +1,25 @@
 'use strict';
 
+/**
+ * Wrapper around of selector of elements with specify class name and filter
+ * of elements with the tag name.
+ *
+ * This method is created with the intention of replace the function of jQuery
+ * that filter for class name and return the collection of elements with the
+ * tag specified.
+ *
+ * Equivalent jQuery: $('className' 'tagName')
+ *
+ * @param element {HTMLElement} Where the elements will be searched.
+ * @param className {string} Name of class that filter the elements.
+ * @param tagName {string} Name of tag for filter the elements.
+ * @return {HTMLCollection} Collection of elements.
+ */
+function getElementsBySelectionOfClass(element, className, tagName) {
+    const selection = element.getElementsByClassName(className)[0];
+    return selection.getElementsByTagName(tagName);
+}
+
 function Calendar(settings) {
     var self = this;
 
