@@ -22,14 +22,17 @@ class SelectorHTML {
     // Methods
 
     /**
-     * Wrapper around of selector of elements with specify class name and filter
-     * of elements with the tag name.
+     * Wrapper around of selector of elements with specify class name and
+     * filter of elements with the tag name.
      *
-     * This method is created with the intention of replace the function of jQuery
-     * that filter for class name and return the collection of elements with the
-     * tag specified.
+     * This method is created with the intention of replace the function of
+     * jQuery that filter for class name and return the collection of elements
+     * with the tag specified.
      *
      * Equivalent jQuery: $('className' 'tagName')
+     *
+     * Requirement: The element select by class name should be exist and be
+     * unique.
      *
      * @param className {string} Name of class that filter the elements.
      * @param tagName {string} Name of tag for filter the elements.
