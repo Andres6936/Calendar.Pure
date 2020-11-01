@@ -18,6 +18,9 @@ function Calendar(settings) {
      */
     this.presetIsOpen = false;
 
+    /**
+     * @type {*|boolean}
+     */
     this.sameDayRange = settings.same_day_range || false;
 
     /**
