@@ -35,7 +35,7 @@ class SelectorHTML {
      * @param tagName {string} Name of tag for filter the elements.
      * @return {HTMLCollection} Collection of elements.
      */
-    getElementsBySelectionOfClass(className, tagName) {
+    getElementsByTag(className, tagName) {
         console.assert(typeof className === 'string');
         console.assert(typeof tagName === 'string');
 
@@ -242,7 +242,7 @@ function Calendar(settings) {
 
     const selector = new SelectorHTML(this.element[0]);
 
-    for (const element of selector.getElementsBySelectionOfClass('dr-year-switcher', 'i')) {
+    for (const element of selector.getElementsByTag('dr-year-switcher', 'i')) {
         element.onclick = function () {
             const m = $('.dr-month-switcher span', self.element).data('month');
             const y = $('.dr-year-switcher span', self.element).data('year');
