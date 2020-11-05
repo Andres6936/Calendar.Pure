@@ -179,10 +179,20 @@ function Calendar(settings) {
 
     }
 
+    try {
+        for (const element of selector.filterClass('dr-date')) {
+            element.onclick = function () {
+                self.calendarOpen(this);
+            }
+        }
+    } catch (ignored) {
+
+    }
+
     $('.dr-date', this.element).on({
-        'click': function () {
-            self.calendarOpen(this);
-        },
+        // 'click': function () {
+        //self.calendarOpen(this);
+        // },
 
         /**
          *
