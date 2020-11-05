@@ -47,6 +47,21 @@ class SelectorHTML {
     }
 
     /**
+     * @param className {string} Name of class that filter the elements.
+     * @throws Error If not elements found with the className specify.
+     * @return {HTMLCollection} Collection of elements.
+     */
+    filterClass(className) {
+        console.assert(typeof className === 'string');
+
+        const selection = this.#element.getElementsByClassName(className);
+        if (selection.length === 0) {
+            throw new Error(`Not elements found with the class: ${className}`);
+        }
+        return selection;
+    }
+
+    /**
      * @param className {string}
      * @throws Error If the element with the class not exist.
      * @return {HTMLElement}
@@ -146,17 +161,23 @@ function Calendar(settings) {
 
     }
 
-    $('.dr-list-item', this.element).click(function () {
-        var start = $('.dr-item-aside', this).data('start');
-        var end = $('.dr-item-aside', this).data('end');
+    try {
+        for (const element of selector.filterClass('dr-list-item')) {
+            element.onclick = function () {
+                const start = $('.dr-item-aside', this).data('start');
+                const end = $('.dr-item-aside', this).data('end');
 
-        self.start_date = self.calendarCheckDate(start);
-        self.end_date = self.calendarCheckDate(end);
+                self.start_date = self.calendarCheckDate(start);
+                self.end_date = self.calendarCheckDate(end);
 
-        self.calendarSetDates();
-        self.presetToggle();
-        self.calendarSaveDates();
-    });
+                self.calendarSetDates();
+                self.presetToggle();
+                self.calendarSaveDates();
+            }
+        }
+    } catch (ignored) {
+
+    }
 
     $('.dr-date', this.element).on({
         'click': function () {
