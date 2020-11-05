@@ -283,6 +283,10 @@ function Calendar(settings) {
      */
     function setEventToggle(switcher) {
         const span = switcher.getElementsByTagName('span').item(0);
+
+        span.dataset.month = moment().month();
+        span.dataset.year = moment().year();
+
         const toggles = switcher.getElementsByTagName('i');
         for (const toggle of toggles) {
             toggle.onclick = function () {
