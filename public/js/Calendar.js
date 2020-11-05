@@ -217,16 +217,16 @@ function Calendar(settings) {
                         self.calendarSaveDates();
                         self.calendarClose('force');
                     }
-                } else if (event.code === 'Enter') {// Enter
+                } else if (event.code === 'Enter') {
                     event.preventDefault();
                     self.calendarCheckDates();
                     self.calendarSetDates();
                     self.calendarSaveDates();
                     self.calendarClose('force');
-                } else if (event.code === 'Escape') {// ESC
+                } else if (event.code === 'Escape') {
                     self.calendarSetDates();
                     self.calendarClose('force');
-                } else if (event.code === 'ArrowUp') {// Up
+                } else if (event.code === 'ArrowUp') {
                     event.preventDefault();
                     var timeframe = 'day';
 
@@ -240,7 +240,7 @@ function Calendar(settings) {
 
                     $(this).html(back.format(self.format.input));
                     self.current_date = back;
-                } else if (event.code === 'ArrowDown') {// Down
+                } else if (event.code === 'ArrowDown') {
                     event.preventDefault();
                     var timeframe = 'day';
 
