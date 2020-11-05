@@ -298,13 +298,16 @@ function Calendar(settings) {
                 const back = thisMoment.clone().subtract(1, 'month');
                 const forward = thisMoment.clone().add(1, 'month').startOf('day');
 
-                span.dataset.month = thisMoment.month();
-                span.dataset.year = thisMoment.year();
-
                 if (toggle.classList.contains('dr-left')) {
                     self.calendarOpen(self.selected, back);
+
+                    span.dataset.month = back.month();
+                    span.dataset.year = back.year();
                 } else if (toggle.classList.contains('dr-right')) {
                     self.calendarOpen(self.selected, forward);
+
+                    span.dataset.month = forward.month();
+                    span.dataset.year = forward.year();
                 }
             }
         }
