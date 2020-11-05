@@ -184,28 +184,24 @@ function Calendar(settings) {
             element.onclick = function () {
                 self.calendarOpen(this);
             }
+
+            /**
+             * @param event KeyboardEvent: objects describe a user interaction with
+             *  the keyboard; each event describes a single interaction between
+             *  the user and a key (or combination of a key with modifier keys) on
+             *  the keyboard.
+             */
+            element.addEventListener('keyup', function (event) {
+                console.log('Keyup Event');
+                if (event.code === 9 && !self.calIsOpen && !self.start_date && !self.end_date)
+                    self.calendarOpen(this);
+            })
         }
     } catch (ignored) {
 
     }
 
     $('.dr-date', this.element).on({
-        // 'click': function () {
-        //self.calendarOpen(this);
-        // },
-
-        /**
-         *
-         * @param event KeyboardEvent: objects describe a user interaction with
-         *  the keyboard; each event describes a single interaction between
-         *  the user and a key (or combination of a key with modifier keys) on
-         *  the keyboard.
-         */
-        'keyup': function (event) {
-            console.log('Keyup');
-            if (event.code === 9 && !self.calIsOpen && !self.start_date && !self.end_date)
-                self.calendarOpen(this);
-        },
 
         /**
          *
