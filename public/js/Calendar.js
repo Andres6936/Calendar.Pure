@@ -206,7 +206,7 @@ function Calendar(settings) {
              */
             element.addEventListener('keydown', function (event) {
                 if (event.code === 'Tab') {
-                    if ($(self.selected).hasClass('dr-date-start')) {
+                    if (self.selected?.classList.contains('dr-date-start')) {
                         event.preventDefault();
                         self.calendarCheckDates();
                         self.calendarSetDates();
