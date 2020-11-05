@@ -165,6 +165,7 @@ function Calendar(settings) {
         for (const element of selector.filterClass('dr-list-item')) {
             element.onclick = function () {
                 // Only exist a item-aside for each list-item
+                // @type {HTMLElement}
                 const itemAside = element.getElementsByClassName('dr-item-aside').item(0);
 
                 const start = itemAside.dataset.start;
@@ -176,6 +177,10 @@ function Calendar(settings) {
                 self.calendarSetDates();
                 self.presetToggle();
                 self.calendarSaveDates();
+
+                // Reference for this code:
+                //  https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
+                //  https://developer.mozilla.org/en-US/docs/Web/API/HTMLOrForeignElement/dataset
             }
         }
     } catch (ignored) {
