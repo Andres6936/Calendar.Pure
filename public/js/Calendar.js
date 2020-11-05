@@ -278,20 +278,37 @@ function Calendar(settings) {
 
     }
 
-    for (const element of selector.filterClassGetByTag('dr-month-switcher', 'i')) {
-        element.onclick = function () {
-            const m = $('.dr-month-switcher span', self.element).data('month');
-            const y = $('.dr-year-switcher span', self.element).data('year');
-            const this_moment = moment([y, m, 1]);
-            const back = this_moment.clone().subtract(1, 'month');
-            const forward = this_moment.clone().add(1, 'month').startOf('day');
+    /**
+     * @param switcher {Element}
+     */
+    function setEventToggle(switcher) {
+        const span = switcher.getElementsByTagName('span').item(0);
+        const toggles = switcher.getElementsByTagName('i');
+        for (const toggle of toggles) {
+            toggle.onclick = function () {
+                const m = span.dataset.month;
+                const y = span.dataset.year;
 
-            if ($(this).hasClass('dr-left')) {
-                self.calendarOpen(self.selected, back);
-            } else if ($(this).hasClass('dr-right')) {
-                self.calendarOpen(self.selected, forward);
+                const thisMoment = moment([y, m, 1]);
+
+                const back = thisMoment.clone().subtract(1, 'month');
+                const forward = thisMoment.clone().add(1, 'month').startOf('day');
+
+                if (toggle.classList.contains('dr-left')) {
+                    self.calendarOpen(self.selected, back);
+                } else if (toggle.classList.contains('dr-right')) {
+                    self.calendarOpen(self.selected, forward);
+                }
             }
         }
+    }
+
+    for (const element of selector.filterClass('dr-range-switcher')) {
+        const monthSwitcher = element.getElementsByClassName('dr-month-switcher').item(0);
+        setEventToggle(monthSwitcher);
+
+        const yearSwitcher = element.getElementsByClassName('dr-year-switcher').item(0);
+        setEventToggle(yearSwitcher);
     }
 
     for (const element of selector.filterClassGetByTag('dr-year-switcher', 'i')) {
