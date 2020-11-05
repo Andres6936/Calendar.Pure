@@ -284,6 +284,7 @@ function Calendar(settings) {
     function setEventToggle(switcher) {
         const span = switcher.getElementsByTagName('span').item(0);
 
+        // Construct, set the properties month and year in the span tag
         span.dataset.month = moment().month();
         span.dataset.year = moment().year();
 
