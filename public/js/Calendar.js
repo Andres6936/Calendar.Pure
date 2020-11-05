@@ -164,8 +164,11 @@ function Calendar(settings) {
     try {
         for (const element of selector.filterClass('dr-list-item')) {
             element.onclick = function () {
-                const start = $('.dr-item-aside', this).data('start');
-                const end = $('.dr-item-aside', this).data('end');
+                // Only exist a item-aside for each list-item
+                const itemAside = element.getElementsByClassName('dr-item-aside').item(0);
+
+                const start = itemAside.dataset.start;
+                const end = itemAside.dataset.end;
 
                 self.start_date = self.calendarCheckDate(start);
                 self.end_date = self.calendarCheckDate(end);
