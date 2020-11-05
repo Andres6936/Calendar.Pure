@@ -168,7 +168,9 @@ function Calendar(settings) {
                 // @type {HTMLElement}
                 const itemAside = element.getElementsByClassName('dr-item-aside').item(0);
 
+                // @type {DOMStringMap}
                 const start = itemAside.dataset.start;
+                // @type {DOMStringMap}
                 const end = itemAside.dataset.end;
 
                 self.start_date = self.calendarCheckDate(start);
