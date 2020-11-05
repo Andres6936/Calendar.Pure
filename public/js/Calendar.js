@@ -210,7 +210,14 @@ function Calendar(settings) {
                         event.preventDefault();
                         self.calendarCheckDates();
                         self.calendarSetDates();
-                        $('.dr-date-end', self.element).trigger('click');
+
+                        try {
+                            for (const element of selector.filterClass('dr-date-end')) {
+                                element.click();
+                            }
+                        } catch (ignored) {
+
+                        }
                     } else {
                         self.calendarCheckDates();
                         self.calendarSetDates();
