@@ -302,11 +302,13 @@ function Calendar(settings) {
                 if (toggle.classList.contains('dr-left')) {
                     self.calendarOpen(self.selected, back);
 
+                    // Update the current month and year for the toggle
                     span.dataset.month = back.month();
                     span.dataset.year = back.year();
                 } else if (toggle.classList.contains('dr-right')) {
                     self.calendarOpen(self.selected, forward);
 
+                    // Update the current month and year for the toggle
                     span.dataset.month = forward.month();
                     span.dataset.year = forward.year();
                 }
