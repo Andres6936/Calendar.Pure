@@ -205,66 +205,55 @@ function Calendar(settings) {
              *  the keyboard.
              */
             element.addEventListener('keydown', function (event) {
-                switch (event.code) {
-
-                    case 'Tab':
-                        if ($(self.selected).hasClass('dr-date-start')) {
-                            event.preventDefault();
-                            self.calendarCheckDates();
-                            self.calendarSetDates();
-                            $('.dr-date-end', self.element).trigger('click');
-                        } else {
-                            self.calendarCheckDates();
-                            self.calendarSetDates();
-                            self.calendarSaveDates();
-                            self.calendarClose('force');
-                        }
-                        break;
-
-                    case 'Enter': // Enter
+                if (event.code === 'Tab') {
+                    if ($(self.selected).hasClass('dr-date-start')) {
                         event.preventDefault();
+                        self.calendarCheckDates();
+                        self.calendarSetDates();
+                        $('.dr-date-end', self.element).trigger('click');
+                    } else {
                         self.calendarCheckDates();
                         self.calendarSetDates();
                         self.calendarSaveDates();
                         self.calendarClose('force');
-                        break;
+                    }
+                } else if (event.code === 'Enter') {// Enter
+                    event.preventDefault();
+                    self.calendarCheckDates();
+                    self.calendarSetDates();
+                    self.calendarSaveDates();
+                    self.calendarClose('force');
+                } else if (event.code === 'Escape') {// ESC
+                    self.calendarSetDates();
+                    self.calendarClose('force');
+                } else if (event.code === 'ArrowUp') {// Up
+                    event.preventDefault();
+                    var timeframe = 'day';
 
-                    case 'Escape': // ESC
-                        self.calendarSetDates();
-                        self.calendarClose('force');
-                        break;
+                    if (event.shiftKey)
+                        timeframe = 'week';
 
-                    case 'ArrowUp': // Up
-                        event.preventDefault();
-                        var timeframe = 'day';
+                    if (event.metaKey)
+                        timeframe = 'month';
 
-                        if (event.shiftKey)
-                            timeframe = 'week';
+                    var back = moment(self.current_date).subtract(1, timeframe);
 
-                        if (event.metaKey)
-                            timeframe = 'month';
+                    $(this).html(back.format(self.format.input));
+                    self.current_date = back;
+                } else if (event.code === 'ArrowDown') {// Down
+                    event.preventDefault();
+                    var timeframe = 'day';
 
-                        var back = moment(self.current_date).subtract(1, timeframe);
+                    if (event.shiftKey)
+                        timeframe = 'week';
 
-                        $(this).html(back.format(self.format.input));
-                        self.current_date = back;
-                        break;
+                    if (event.metaKey)
+                        timeframe = 'month';
 
-                    case 'ArrowDown': // Down
-                        event.preventDefault();
-                        var timeframe = 'day';
+                    var forward = moment(self.current_date).add(1, timeframe);
 
-                        if (event.shiftKey)
-                            timeframe = 'week';
-
-                        if (event.metaKey)
-                            timeframe = 'month';
-
-                        var forward = moment(self.current_date).add(1, timeframe);
-
-                        $(this).html(forward.format(self.format.input));
-                        self.current_date = forward;
-                        break;
+                    $(this).html(forward.format(self.format.input));
+                    self.current_date = forward;
                 }
             })
         }
