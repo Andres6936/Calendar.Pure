@@ -196,84 +196,81 @@ function Calendar(settings) {
                 if (event.code === 9 && !self.calIsOpen && !self.start_date && !self.end_date)
                     self.calendarOpen(this);
             })
-        }
-    } catch (ignored) {
 
-    }
+            /**
+             *
+             * @param event KeyboardEvent: objects describe a user interaction with
+             *  the keyboard; each event describes a single interaction between
+             *  the user and a key (or combination of a key with modifier keys) on
+             *  the keyboard.
+             */
+            element.addEventListener('keydown', function (event) {
+                switch (event.code) {
 
-    $('.dr-date', this.element).on({
+                    case 'Tab':
+                        if ($(self.selected).hasClass('dr-date-start')) {
+                            event.preventDefault();
+                            self.calendarCheckDates();
+                            self.calendarSetDates();
+                            $('.dr-date-end', self.element).trigger('click');
+                        } else {
+                            self.calendarCheckDates();
+                            self.calendarSetDates();
+                            self.calendarSaveDates();
+                            self.calendarClose('force');
+                        }
+                        break;
 
-        /**
-         *
-         * @param event KeyboardEvent: objects describe a user interaction with
-         *  the keyboard; each event describes a single interaction between
-         *  the user and a key (or combination of a key with modifier keys) on
-         *  the keyboard.
-         */
-        'keydown': function (event) {
-            switch (event.keyCode) {
-
-                case 9: // Tab
-                    if ($(self.selected).hasClass('dr-date-start')) {
+                    case 'Enter': // Enter
                         event.preventDefault();
-                        self.calendarCheckDates();
-                        self.calendarSetDates();
-                        $('.dr-date-end', self.element).trigger('click');
-                    } else {
                         self.calendarCheckDates();
                         self.calendarSetDates();
                         self.calendarSaveDates();
                         self.calendarClose('force');
-                    }
-                    break;
+                        break;
 
-                case 13: // Enter
-                    event.preventDefault();
-                    self.calendarCheckDates();
-                    self.calendarSetDates();
-                    self.calendarSaveDates();
-                    self.calendarClose('force');
-                    break;
+                    case 'Escape': // ESC
+                        self.calendarSetDates();
+                        self.calendarClose('force');
+                        break;
 
-                case 27: // ESC
-                    self.calendarSetDates();
-                    self.calendarClose('force');
-                    break;
+                    case 'ArrowUp': // Up
+                        event.preventDefault();
+                        var timeframe = 'day';
 
-                case 38: // Up
-                    event.preventDefault();
-                    var timeframe = 'day';
+                        if (event.shiftKey)
+                            timeframe = 'week';
 
-                    if (event.shiftKey)
-                        timeframe = 'week';
+                        if (event.metaKey)
+                            timeframe = 'month';
 
-                    if (event.metaKey)
-                        timeframe = 'month';
+                        var back = moment(self.current_date).subtract(1, timeframe);
 
-                    var back = moment(self.current_date).subtract(1, timeframe);
+                        $(this).html(back.format(self.format.input));
+                        self.current_date = back;
+                        break;
 
-                    $(this).html(back.format(self.format.input));
-                    self.current_date = back;
-                    break;
+                    case 'ArrowDown': // Down
+                        event.preventDefault();
+                        var timeframe = 'day';
 
-                case 40: // Down
-                    event.preventDefault();
-                    var timeframe = 'day';
+                        if (event.shiftKey)
+                            timeframe = 'week';
 
-                    if (event.shiftKey)
-                        timeframe = 'week';
+                        if (event.metaKey)
+                            timeframe = 'month';
 
-                    if (event.metaKey)
-                        timeframe = 'month';
+                        var forward = moment(self.current_date).add(1, timeframe);
 
-                    var forward = moment(self.current_date).add(1, timeframe);
-
-                    $(this).html(forward.format(self.format.input));
-                    self.current_date = forward;
-                    break;
-            }
+                        $(this).html(forward.format(self.format.input));
+                        self.current_date = forward;
+                        break;
+                }
+            })
         }
-    });
+    } catch (ignored) {
+
+    }
 
     for (const element of selector.filterClassGetByTag('dr-month-switcher', 'i')) {
         element.onclick = function () {
