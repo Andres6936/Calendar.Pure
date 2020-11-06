@@ -280,8 +280,9 @@ function Calendar(settings) {
 
     /**
      * @param switcher {Element}
+     * @param typeToggle {string}
      */
-    function setEventToggle(switcher) {
+    function setEventToggle(switcher, typeToggle) {
         const span = switcher.getElementsByTagName('span').item(0);
 
         // Construct, set the properties month and year in the span tag.
@@ -297,32 +298,42 @@ function Calendar(settings) {
 
                 const thisMoment = moment([y, m, 1]);
 
-                const back = thisMoment.clone().subtract(1, 'month');
-                const forward = thisMoment.clone().add(1, 'month').startOf('day');
+                const backDate = function () {
+                    return thisMoment.clone().subtract(1, typeToggle);
+                }();
+
+                const forwardDate = function () {
+                    return thisMoment.clone().add(1, typeToggle).startOf('day');
+                }();
 
                 if (toggle.classList.contains('dr-left')) {
                     self.calendarOpen(self.selected, back);
 
                     // Update the current month and year for the toggle.
-                    span.dataset.month = back.month();
-                    span.dataset.year = back.year();
+                    span.dataset.month = backDate.month();
+                    span.dataset.year = backDate.year();
                 } else if (toggle.classList.contains('dr-right')) {
                     self.calendarOpen(self.selected, forward);
 
                     // Update the current month and year for the toggle.
-                    span.dataset.month = forward.month();
-                    span.dataset.year = forward.year();
+                    span.dataset.month = forwardDate.month();
+                    span.dataset.year = forwardDate.year();
                 }
             }
         }
     }
 
+    const TypeToggle = {
+        YEAR: 'year',
+        MONTH: 'month',
+    }
+
     for (const element of selector.filterClass('dr-range-switcher')) {
         const monthSwitcher = element.getElementsByClassName('dr-month-switcher').item(0);
-        setEventToggle(monthSwitcher);
+        setEventToggle(monthSwitcher, TypeToggle.MONTH);
 
         const yearSwitcher = element.getElementsByClassName('dr-year-switcher').item(0);
-        setEventToggle(yearSwitcher);
+        setEventToggle(yearSwitcher, TypeToggle.MONTH);
     }
 
     for (const element of selector.filterClassGetByTag('dr-year-switcher', 'i')) {
