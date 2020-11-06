@@ -847,12 +847,19 @@ Calendar.prototype.calendarArray = function (start, end, current, switcher) {
 
 
 Calendar.prototype.calendarHTML = function (type) {
-    var ul_days_of_the_week = $('<ul class="dr-days-of-week-list"></ul>');
-    var days = this.days_array.splice(moment.localeData().firstDayOfWeek()).concat(this.days_array.splice(0, moment.localeData().firstDayOfWeek()));
+    // @type {Element} Created the element that contain the day of week.
+    const daysOfTheWeek = document.createElement('ul');
+    daysOfTheWeek.classList.add('dr-days-of-week-list');
 
-    $.each(days, function (i, elem) {
-        ul_days_of_the_week.append('<li class="dr-day-of-week">' + elem + '</li>');
-    });
+    const days = this.days_array.splice(moment.localeData().firstDayOfWeek()).concat(this.days_array.splice(0, moment.localeData().firstDayOfWeek()));
+
+    for (const day of days) {
+        const element = document.createElement('li');
+        element.classList.add('dr-day-of-week');
+        element.innerText = day;
+
+        daysOfTheWeek.appendChild(element);
+    }
 
     if (type === "double")
         return this.element.append('<div class="dr-input">' +
@@ -883,7 +890,7 @@ Calendar.prototype.calendarHTML = function (type) {
             '<i class="dr-right"></i>' +
             '</div>' +
             '</div>' +
-            ul_days_of_the_week[0].outerHTML +
+            daysOfTheWeek.outerHTML +
             '<ul class="dr-day-list"></ul>' +
             '</div>' +
             (this.presets ? this.presetCreate()[0].outerHTML : '') +
@@ -909,7 +916,7 @@ Calendar.prototype.calendarHTML = function (type) {
         '<i class="dr-right"></i>' +
         '</div>' +
         '</div>' +
-        ul_days_of_the_week[0].outerHTML +
+        daysOfTheWeek.outerHTML +
         '<ul class="dr-day-list"></ul>' +
         '</div>' +
         '</div>');
