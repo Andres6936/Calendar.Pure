@@ -75,7 +75,7 @@ class SelectorHTML {
 }
 
 function Calendar(settings) {
-    var self = this;
+    const self = this;
 
     /**
      * @type {Object}
