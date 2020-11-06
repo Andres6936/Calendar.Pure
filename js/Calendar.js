@@ -858,6 +858,9 @@ Calendar.prototype.calendarHTML = function (type) {
 
     // @type {string} Generally a string of only two characters.
     for (const day of days) {
+        console.assert(day.length === 2,
+            'The string that represent the day not have two (2) characters.');
+
         // @type {HTMLLIElement} Represent the day.
         const element = document.createElement('li');
         element.classList.add('dr-day-of-week');
