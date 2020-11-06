@@ -302,16 +302,15 @@ function Calendar(settings) {
 
                 const thisMoment = moment([y, m, 1]);
 
-                const backDate = thisMoment.clone().subtract(1, typeToggle);
-                const forwardDate = thisMoment.clone().add(1, typeToggle).startOf('day');
-
                 if (toggle.classList.contains('dr-left')) {
+                    const backDate = thisMoment.clone().subtract(1, typeToggle);
                     self.calendarOpen(self.selected, backDate);
 
                     // Update the current month and year for the toggle.
                     span.dataset.month = backDate.month();
                     span.dataset.year = backDate.year();
                 } else if (toggle.classList.contains('dr-right')) {
+                    const forwardDate = thisMoment.clone().add(1, typeToggle).startOf('day');
                     self.calendarOpen(self.selected, forwardDate);
 
                     // Update the current month and year for the toggle.
