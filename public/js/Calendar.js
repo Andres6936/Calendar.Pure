@@ -328,6 +328,15 @@ function Calendar(settings) {
         MONTH: 'month',
     }
 
+    // The Object.freeze() method freezes an object. A frozen object can no
+    // longer be changed; freezing an object prevents new properties from being
+    // added to it, existing properties from being removed, prevents changing
+    // the enumerability, configurability, or writability of existing
+    // properties, and prevents the values of existing properties from being
+    // changed. In addition, freezing an object also prevents its prototype
+    // from being changed. freeze() returns the same object that was passed in.
+    Object.freeze(TypeToggle);
+
     for (const element of selector.filterClass('dr-range-switcher')) {
         const monthSwitcher = element.getElementsByClassName('dr-month-switcher').item(0);
         setEventToggle(monthSwitcher, TypeToggle.MONTH);
