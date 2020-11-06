@@ -939,12 +939,18 @@ Calendar.prototype.parseDate = function (d) {
     }
 }
 
-
+/**
+ * Generate a Array with length passed for parameters and initialize each index
+ *  from 0 to length.
+ *
+ * @param length Size of array to generate.
+ * @return {any[Number]} Each index go to from 0 to length.
+ */
 Calendar.prototype.range = function (length) {
-    var range = new Array(length);
+    const range = new Array(length);
 
-    for (var idx = 0; idx < length; idx++) {
-        range[idx] = idx;
+    for (let index = 0; index < length; index++) {
+        range[index] = index;
     }
 
     return range;
