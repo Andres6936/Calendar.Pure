@@ -651,9 +651,6 @@ Calendar.prototype.calendarOpen = function (selected, switcher) {
     $('.dr-day', this.element).on({
         mouseenter: function () {
             let selected = $(this);
-            const start_date = moment(self.start_date);
-            const end_date = moment(self.end_date);
-            const current_date = moment(self.current_date);
 
             if ($(self.selected).hasClass("dr-date-start")) {
                 selected.addClass('dr-hover dr-hover-before');
