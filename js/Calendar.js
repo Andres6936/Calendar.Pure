@@ -600,9 +600,9 @@ Calendar.prototype.stringToDate = function (str) {
 
 
 Calendar.prototype.calendarOpen = function (selected, switcher) {
-    var self = this;
-    var other;
-    var cal_width = $('.dr-dates', this.element).innerWidth() - 8;
+    const self = this;
+    let other;
+    const cal_width = $('.dr-dates', this.element).innerWidth() - 8;
 
     this.selected = selected || this.selected;
 
@@ -621,11 +621,11 @@ Calendar.prototype.calendarOpen = function (selected, switcher) {
     this.calendarCreate(switcher);
     this.calendarSetDates();
 
-    var next_month = moment(switcher || this.current_date).add(1, 'month').startOf('month').startOf('day');
-    var past_month = moment(switcher || this.current_date).subtract(1, 'month').endOf('month');
-    var next_year = moment(switcher || this.current_date).add(1, 'year').startOf('month').startOf('day');
-    var past_year = moment(switcher || this.current_date).subtract(1, 'year').endOf('month');
-    var this_moment = moment(switcher || this.current_date);
+    const next_month = moment(switcher || this.current_date).add(1, 'month').startOf('month').startOf('day');
+    const past_month = moment(switcher || this.current_date).subtract(1, 'month').endOf('month');
+    const next_year = moment(switcher || this.current_date).add(1, 'year').startOf('month').startOf('day');
+    const past_year = moment(switcher || this.current_date).subtract(1, 'year').endOf('month');
+    const this_moment = moment(switcher || this.current_date);
 
     $('.dr-month-switcher span', this.element)
         .data('month', this_moment.month())
@@ -650,10 +650,10 @@ Calendar.prototype.calendarOpen = function (selected, switcher) {
 
     $('.dr-day', this.element).on({
         mouseenter: function () {
-            var selected = $(this);
-            var start_date = moment(self.start_date);
-            var end_date = moment(self.end_date);
-            var current_date = moment(self.current_date);
+            let selected = $(this);
+            const start_date = moment(self.start_date);
+            const end_date = moment(self.end_date);
+            const current_date = moment(self.current_date);
 
             if ($(self.selected).hasClass("dr-date-start")) {
                 selected.addClass('dr-hover dr-hover-before');
@@ -676,9 +676,9 @@ Calendar.prototype.calendarOpen = function (selected, switcher) {
                 other = undefined;
 
                 self.range(6 * 7).forEach(function (i) {
-                    var next = selected.next().data('date');
-                    var prev = selected.prev().data('date');
-                    var curr = selected.data('date');
+                    let next = selected.next().data('date');
+                    let prev = selected.prev().data('date');
+                    const curr = selected.data('date');
 
                     if (!curr)
                         return false;
