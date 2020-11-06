@@ -353,8 +353,8 @@ function Calendar(settings) {
     }
 
     // Once you click into a selection.. this lets you click out
-    var clickHandler = function (event) {
-        var contains = $(event.target).parent().closest(self.element);
+    const clickHandler = function (event) {
+        const contains = $(event.target).parent().closest(self.element);
 
         if (!contains.length) {
             document.removeEventListener('click', clickHandler, false);
@@ -370,7 +370,7 @@ function Calendar(settings) {
                 self.calendarClose('force');
             }
         }
-    }
+    };
 
     this.element.on('click', function () {
         document.addEventListener('click', clickHandler, false);
