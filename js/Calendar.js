@@ -672,7 +672,12 @@ Calendar.prototype.calendarOpen = function (selected, switcher) {
             function setMaybeRange(type) {
                 other = undefined;
 
-                self.range(6 * 7).forEach(function (i) {
+                // @type {number}
+                const DAY_PER_WEEK = 7;
+                // @type {number}
+                const AMOUNT_ROW_PER_CALENDAR = 6;
+
+                self.range(DAY_PER_WEEK * AMOUNT_ROW_PER_CALENDAR).forEach(function (i) {
                     let next = selected.next().data('date');
                     let prev = selected.prev().data('date');
                     const curr = selected.data('date');
