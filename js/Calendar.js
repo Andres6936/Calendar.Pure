@@ -944,7 +944,7 @@ Calendar.prototype.parseDate = function (d) {
  *  from 0 to length.
  *
  * @param length Size of array to generate.
- * @return {any[Number]} Each index go to from 0 to length.
+ * @return {[Number]} Each index go to from 0 to length.
  */
 Calendar.prototype.range = function (length) {
     const range = new Array(length);
