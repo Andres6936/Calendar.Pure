@@ -298,10 +298,12 @@ function Calendar(settings) {
 
                 const thisMoment = moment([y, m, 1]);
 
+                // Equivalent to call std::invoke(lambda) - C++17
                 const backDate = function () {
                     return thisMoment.clone().subtract(1, typeToggle);
                 }();
 
+                // Equivalent to call std::invoke(lambda) - C++17
                 const forwardDate = function () {
                     return thisMoment.clone().add(1, typeToggle).startOf('day');
                 }();
