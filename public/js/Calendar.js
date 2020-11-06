@@ -307,13 +307,13 @@ function Calendar(settings) {
                 }();
 
                 if (toggle.classList.contains('dr-left')) {
-                    self.calendarOpen(self.selected, back);
+                    self.calendarOpen(self.selected, backDate);
 
                     // Update the current month and year for the toggle.
                     span.dataset.month = backDate.month();
                     span.dataset.year = backDate.year();
                 } else if (toggle.classList.contains('dr-right')) {
-                    self.calendarOpen(self.selected, forward);
+                    self.calendarOpen(self.selected, forwardDate);
 
                     // Update the current month and year for the toggle.
                     span.dataset.month = forwardDate.month();
@@ -333,23 +333,7 @@ function Calendar(settings) {
         setEventToggle(monthSwitcher, TypeToggle.MONTH);
 
         const yearSwitcher = element.getElementsByClassName('dr-year-switcher').item(0);
-        setEventToggle(yearSwitcher, TypeToggle.MONTH);
-    }
-
-    for (const element of selector.filterClassGetByTag('dr-year-switcher', 'i')) {
-        element.onclick = function () {
-            const m = $('.dr-month-switcher span', self.element).data('month');
-            const y = $('.dr-year-switcher span', self.element).data('year');
-            const this_moment = moment([y, m, 1]);
-            const back = this_moment.clone().subtract(1, 'year');
-            const forward = this_moment.clone().add(1, 'year').startOf('day');
-
-            if (this.classList.contains('dr-left')) {
-                self.calendarOpen(self.selected, back);
-            } else if (this.classList.contains('dr-right')) {
-                self.calendarOpen(self.selected, forward);
-            }
-        }
+        setEventToggle(yearSwitcher, TypeToggle.YEAR);
     }
 
     $('.dr-dates-dash', this.element).click(function () {
