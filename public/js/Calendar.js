@@ -64,7 +64,7 @@ class SelectorHTML {
     /**
      * @param className {string} Name of class that filter the elements.
      * @throws Error If the element with the class not exist.
-     * @return {HTMLCollectionOf<Element>}
+     * @return {Element}
      */
     getFirstByClass(className) {
         // @type {HTMLCollectionOf<HTMLElement>}
