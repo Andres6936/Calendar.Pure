@@ -488,7 +488,7 @@ Calendar.prototype.calendarSetDates = function () {
         if (old_date.length === 0 && !this.required)
             new_date = '';
 
-        if (old_date != new_date)
+        if (old_date !== new_date)
             $('.dr-date', this.element).html(new_date);
     }
 }
@@ -526,7 +526,7 @@ Calendar.prototype.calendarCheckDate = function (d) {
     var d_array = d ? d.replace(regex, '').split(' ') : [];
 
     // Add current year if year is not included
-    if (d_array.length == 2) {
+    if (d_array.length === 2) {
         d_array.push(moment().format(this.format.jump_year));
         d = d_array.join(' ');
     }
@@ -768,7 +768,7 @@ Calendar.prototype.calendarOpen = function (selected, switcher) {
 Calendar.prototype.calendarClose = function (type) {
     var self = this;
 
-    if (!this.calIsOpen || this.presetIsOpen || type == 'force') {
+    if (!this.calIsOpen || this.presetIsOpen || type === 'force') {
         $('.dr-calendar', this.element).slideUp(200, function () {
             $('.dr-day', self.element).remove();
         });
@@ -776,7 +776,7 @@ Calendar.prototype.calendarClose = function (type) {
         $('.dr-day', this.element).remove();
     }
 
-    if (type == 'switcher') {
+    if (type === 'switcher') {
         return false;
     }
 
@@ -854,7 +854,7 @@ Calendar.prototype.calendarHTML = function (type) {
         ul_days_of_the_week.append('<li class="dr-day-of-week">' + elem + '</li>');
     });
 
-    if (type == "double")
+    if (type === "double")
         return this.element.append('<div class="dr-input">' +
             '<div class="dr-dates">' +
             '<div class="dr-date dr-date-start" contenteditable>' + moment(this.start_date).format(this.format.input) + '</div>' +
