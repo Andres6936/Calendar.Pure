@@ -352,10 +352,6 @@ function Calendar(settings) {
         setEventToggle(yearSwitcher, TypeToggle.YEAR);
     }
 
-    $('.dr-dates-dash', this.element).click(function () {
-        $('.dr-date-start', self.element).trigger('click');
-    });
-
     // Once you click into a selection.. this lets you click out
     var clickHandler = function (event) {
         var contains = $(event.target).parent().closest(self.element);
