@@ -283,6 +283,10 @@ function Calendar(settings) {
      * @param typeToggle {string}
      */
     function setEventToggle(switcher, typeToggle) {
+        // The span inside of element is that contain the data properties.
+        // The properties that should be save the span element are:
+        //  - current month selected.
+        //  - current year selected.
         const span = switcher.getElementsByTagName('span').item(0);
 
         // Construct, set the properties month and year in the span tag.
