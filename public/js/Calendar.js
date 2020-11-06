@@ -383,7 +383,7 @@ function Calendar(settings) {
 
 
 Calendar.prototype.presetToggle = function () {
-    if (this.presetIsOpen == false) {
+    if (this.presetIsOpen === false) {
         this.orig_start_date = this.start_date;
         this.orig_end_date = this.end_date;
         this.orig_current_date = this.current_date;
@@ -393,7 +393,7 @@ Calendar.prototype.presetToggle = function () {
         this.presetIsOpen = false;
     }
 
-    if (this.calIsOpen == true)
+    if (this.calIsOpen === true)
         this.calendarClose();
 
     $('.dr-preset-list', this.element).slideToggle(200);
