@@ -323,6 +323,10 @@ function Calendar(settings) {
         }
     }
 
+    /**
+     * Enum for the types of toggle that application have.
+     * @type {{MONTH: string, YEAR: string}}
+     */
     const TypeToggle = {
         YEAR: 'year',
         MONTH: 'month',
