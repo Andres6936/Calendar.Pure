@@ -856,6 +856,7 @@ Calendar.prototype.calendarHTML = function (type) {
     const days = this.days_array.splice(moment.localeData().firstDayOfWeek()).concat(this.days_array.splice(0, moment.localeData().firstDayOfWeek()));
     console.assert(days.length === 7, 'The week not have seven (7) days.');
 
+    // @type {string} Generally a string of only two characters.
     for (const day of days) {
         // @type {HTMLLIElement} Represent the day.
         const element = document.createElement('li');
