@@ -4,14 +4,14 @@ class SelectorHTML {
     // Properties
 
     /**
-     * @type {HTMLElement} Reference private to Html Element
+     * @type {Element} Reference private to Html Element
      */
     #element = undefined
 
     // Construct
 
     /**
-     * @param _element {HTMLElement} Reference to Html Element
+     * @param _element {Element} Reference to Html Element
      */
     constructor(_element) {
         console.assert(typeof _element === 'object');
@@ -49,7 +49,7 @@ class SelectorHTML {
     /**
      * @param className {string} Name of class that filter the elements.
      * @throws Error If not elements found with the className specify.
-     * @return {HTMLCollection} Collection of elements.
+     * @return {HTMLCollectionOf<Element>} Collection of elements.
      */
     filterClass(className) {
         console.assert(typeof className === 'string');
@@ -64,7 +64,7 @@ class SelectorHTML {
     /**
      * @param className {string} Name of class that filter the elements.
      * @throws Error If the element with the class not exist.
-     * @return {HTMLElement}
+     * @return {HTMLCollectionOf<Element>}
      */
     getFirstByClass(className) {
         // @type {HTMLCollectionOf<HTMLElement>}
