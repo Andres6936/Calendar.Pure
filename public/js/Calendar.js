@@ -284,7 +284,8 @@ function Calendar(settings) {
     function setEventToggle(switcher) {
         const span = switcher.getElementsByTagName('span').item(0);
 
-        // Construct, set the properties month and year in the span tag
+        // Construct, set the properties month and year in the span tag.
+        // Avoid get undefined when the attribute be read.
         span.dataset.month = moment().month();
         span.dataset.year = moment().year();
 
@@ -302,13 +303,13 @@ function Calendar(settings) {
                 if (toggle.classList.contains('dr-left')) {
                     self.calendarOpen(self.selected, back);
 
-                    // Update the current month and year for the toggle
+                    // Update the current month and year for the toggle.
                     span.dataset.month = back.month();
                     span.dataset.year = back.year();
                 } else if (toggle.classList.contains('dr-right')) {
                     self.calendarOpen(self.selected, forward);
 
-                    // Update the current month and year for the toggle
+                    // Update the current month and year for the toggle.
                     span.dataset.month = forward.month();
                     span.dataset.year = forward.year();
                 }
