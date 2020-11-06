@@ -279,8 +279,13 @@ function Calendar(settings) {
     }
 
     /**
-     * @param switcher {Element}
-     * @param typeToggle {string}
+     * Set the event listener for the toggle, this allow change the month or
+     * year selected in the calendar.
+     *
+     * @param switcher {Element} Each instance of calendar should be set a
+     *  event listener for the toggle.
+     *
+     * @param typeToggle {string} Type toggle include Month or Year.
      */
     function setEventToggle(switcher, typeToggle) {
         // The span inside of element is that contain the data properties.
