@@ -847,13 +847,17 @@ Calendar.prototype.calendarArray = function (start, end, current, switcher) {
 
 
 Calendar.prototype.calendarHTML = function (type) {
-    // @type {Element} Created the element that contain the day of week.
+    // @type {HTMLUListElement} Created the element that contain the day of
+    //  week {seven in total}.
     const daysOfTheWeek = document.createElement('ul');
     daysOfTheWeek.classList.add('dr-days-of-week-list');
 
+    // @type {[string]} Contain the list of day in a week. {seven in total}.
     const days = this.days_array.splice(moment.localeData().firstDayOfWeek()).concat(this.days_array.splice(0, moment.localeData().firstDayOfWeek()));
+    console.assert(days.length === 7, 'The week not have seven (7) days.');
 
     for (const day of days) {
+        // @type {HTMLLIElement} Represent the day.
         const element = document.createElement('li');
         element.classList.add('dr-day-of-week');
         element.innerText = day;
