@@ -1,6 +1,11 @@
 'use strict';
 
 import {TypeCalendar, TypeToggle} from "./Enums.js";
+import {CalendarSingle} from "./CalendarSingle.js";
+import {CalendarDouble} from "./CalendarDouble.js";
+
+new CalendarSingle();
+new CalendarDouble();
 
 class SelectorHTML {
     // Properties
