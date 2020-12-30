@@ -1,5 +1,7 @@
 'use strict';
 
+import {TypeCalendar} from "./Enums.js";
+
 class SelectorHTML {
     // Properties
 
@@ -107,29 +109,6 @@ function Calendar(settings) {
      * @type {HTMLElement|null}
      */
     this.selected = null;
-
-    /**
-     * Enum for determine the type of calendar.
-     *
-     * If the calendar is single, only a date is processed, if
-     * the calendar is double, a start date and end date are
-     * processed.
-     *
-     * @type {{SINGLE: string, DOUBLE: string}}
-     */
-    const TypeCalendar = {
-        SINGLE: 'single',
-        DOUBLE: 'double',
-    }
-
-    // The Object.freeze() method freezes an object. A frozen object can no
-    // longer be changed; freezing an object prevents new properties from being
-    // added to it, existing properties from being removed, prevents changing
-    // the enumerability, configurability, or writability of existing
-    // properties, and prevents the values of existing properties from being
-    // changed. In addition, freezing an object also prevents its prototype
-    // from being changed. freeze() returns the same object that was passed in.
-    Object.freeze(TypeCalendar);
 
     /**
      * @type {string} Indicate if the type of calendar is 'simple' or 'double'.
