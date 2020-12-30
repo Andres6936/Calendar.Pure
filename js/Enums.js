@@ -14,6 +14,15 @@ const TypeCalendar = {
     DOUBLE: 'double',
 }
 
+/**
+ * Enum for the types of toggle that application have.
+ * @type {{MONTH: string, YEAR: string}}
+ */
+const TypeToggle = {
+    YEAR: 'year',
+    MONTH: 'month',
+}
+
 // The Object.freeze() method freezes an object. A frozen object can no
 // longer be changed; freezing an object prevents new properties from being
 // added to it, existing properties from being removed, prevents changing
@@ -22,6 +31,7 @@ const TypeCalendar = {
 // changed. In addition, freezing an object also prevents its prototype
 // from being changed. freeze() returns the same object that was passed in.
 Object.freeze(TypeCalendar);
+Object.freeze(TypeToggle);
 
 // Export the enum
-export {TypeCalendar};
+export {TypeCalendar, TypeToggle};
