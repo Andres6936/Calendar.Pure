@@ -134,7 +134,20 @@ function Calendar(settings) {
     /**
      * @type {string} Indicate if the type of calendar is 'simple' or 'double'.
      */
-    this.type = this.element[0].classList.contains('daterange--single') ? 'single' : 'double';
+    this.type = determineTypeCalendar(this.element[0].classList);
+
+    /**
+     * Determine if the calendar is single o double.
+     * @param classList {DOMTokenList} List of the class.
+     * @return {string} type of calendar.
+     */
+    function determineTypeCalendar(classList) {
+        if (classList.contains('daterange--single')) {
+            return TypeCalendar.SINGLE;
+        } else {
+            return TypeCalendar.DOUBLE;
+        }
+    }
 
     /**
      * @type {boolean}
@@ -161,13 +174,13 @@ function Calendar(settings) {
     this.latest_date = settings.latest_date ? moment(settings.latest_date)
         : moment('2900-12-31', 'YYYY-MM-DD');
     this.end_date = settings.end_date ? moment(settings.end_date)
-        : (this.type === 'double' ? moment() : null);
+        : (this.type === TypeCalendar.DOUBLE ? moment() : null);
     this.start_date = settings.start_date ? moment(settings.start_date)
-        : (this.type === 'double' ? this.end_date.clone().subtract(1, 'month') : null);
+        : (this.type === TypeCalendar.DOUBLE ? this.end_date.clone().subtract(1, 'month') : null);
     this.current_date = settings.current_date ? moment(settings.current_date)
-        : (this.type === 'single' ? moment() : null);
+        : (this.type === TypeCalendar.SINGLE ? moment() : null);
 
-    this.presets = !(settings.presets === false || this.type === 'single');
+    this.presets = !(settings.presets === false || this.type === TypeCalendar.SINGLE);
 
     this.callback = settings.callback || this.calendarSetDates;
 
@@ -518,7 +531,7 @@ Calendar.prototype.calendarSetDates = function () {
 
 
 Calendar.prototype.calendarSaveDates = function () {
-    if (this.type === 'double') {
+    if (this.type === TypeCalendar.DOUBLE) {
         if (!moment(this.orig_end_date).isSame(this.end_date) || !moment(this.orig_start_date).isSame(this.start_date))
             return this.callback();
     } else {
@@ -595,7 +608,7 @@ Calendar.prototype.calendarCheckDates = function () {
         s = e.clone().subtract(6, 'day');
 
     // Push and save if it's valid otherwise return to previous state
-    if (this.type === 'double') {
+    if (this.type === TypeCalendar.DOUBLE) {
 
         // Is this a valid date?
         if (s.isSame(e) && !this.sameDayRange)
