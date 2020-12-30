@@ -846,7 +846,9 @@ Calendar.prototype.calendarArray = function (start, end, current, switcher) {
     return daysInRange;
 }
 
-
+/**
+ * @param type {string|TypeCalendar} If the calendar is of type SINGLE or DOUBLE.
+ */
 Calendar.prototype.calendarHTML = function (type) {
     // @type {HTMLUListElement} Created the element that contain the day of
     //  week {seven in total}.
@@ -870,7 +872,7 @@ Calendar.prototype.calendarHTML = function (type) {
         daysOfTheWeek.appendChild(element);
     }
 
-    if (type === "double")
+    if (type === TypeCalendar.DOUBLE)
         return this.element.append('<div class="dr-input">' +
             '<div class="dr-dates">' +
             '<div class="dr-date dr-date-start" contenteditable>' + moment(this.start_date).format(this.format.input) + '</div>' +
