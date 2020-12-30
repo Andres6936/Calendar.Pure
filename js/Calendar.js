@@ -123,8 +123,10 @@ function Calendar(settings) {
     function determineTypeCalendar(classList) {
         if (classList.contains('daterange--single')) {
             return TypeCalendar.SINGLE;
-        } else {
+        } else if (classList.contains('daterange--double')) {
             return TypeCalendar.DOUBLE;
+        } else {
+            console.error('The Calendar not have a type {SINGLE or DOUBLE} associated.')
         }
     }
 
