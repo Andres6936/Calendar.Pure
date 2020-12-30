@@ -873,11 +873,14 @@ Calendar.prototype.calendarHTML = function (type) {
     }
 
     if (type === TypeCalendar.DOUBLE)
+
+        // With the attribute spellcheck="false" turn off the spell checking.
+
         return this.element.append('<div class="dr-input">' +
             '<div class="dr-dates">' +
-            '<div class="dr-date dr-date-start" contenteditable>' + moment(this.start_date).format(this.format.input) + '</div>' +
+            '<div class="dr-date dr-date-start" contenteditable spellcheck="false">' + moment(this.start_date).format(this.format.input) + '</div>' +
             '<span class="dr-dates-dash">&ndash;</span>' +
-            '<div class="dr-date dr-date-end" contenteditable>' + moment(this.end_date).format(this.format.input) + '</div>' +
+            '<div class="dr-date dr-date-end" contenteditable spellcheck="false">' + moment(this.end_date).format(this.format.input) + '</div>' +
             '</div>' +
 
             (this.presets ? '<div class="dr-presets">' +
