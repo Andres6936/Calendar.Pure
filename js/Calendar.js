@@ -4,9 +4,6 @@ import {TypeCalendar, TypeToggle} from "./Enums.js";
 import {CalendarSingle} from "./CalendarSingle.js";
 import {CalendarDouble} from "./CalendarDouble.js";
 
-new CalendarSingle();
-new CalendarDouble();
-
 class SelectorHTML {
     // Properties
 
@@ -855,90 +852,25 @@ Calendar.prototype.calendarArray = function (start, end, current, switcher) {
  * @param type {string|TypeCalendar} If the calendar is of type SINGLE or DOUBLE.
  */
 Calendar.prototype.calendarHTML = function (type) {
-    // @type {HTMLUListElement} Created the element that contain the day of
-    //  week {seven in total}.
-    const daysOfTheWeek = document.createElement('ul');
-    daysOfTheWeek.classList.add('dr-days-of-week-list');
+    let calendar = undefined;
 
-    // @type {[string]} Contain the list of day in a week. {seven in total}.
-    const days = this.days_array.splice(moment.localeData().firstDayOfWeek()).concat(this.days_array.splice(0, moment.localeData().firstDayOfWeek()));
-    console.assert(days.length === 7, 'The week not have seven (7) days.');
-
-    // @type {string} Generally a string of only two characters.
-    for (const day of days) {
-        console.assert(day.length === 2,
-            'The string that represent the day not have two (2) characters.');
-
-        // @type {HTMLLIElement} Represent the day.
-        const element = document.createElement('li');
-        element.classList.add('dr-day-of-week');
-        element.innerText = day;
-
-        daysOfTheWeek.appendChild(element);
+    if (type === TypeCalendar.SINGLE) {
+        calendar = new CalendarSingle();
+    } else if (type === TypeCalendar.DOUBLE) {
+        calendar = new CalendarDouble();
+    } else {
+        throw new Error("Not is possible determine the type (SINGLE or DOUBLE) of Calendar.");
     }
 
-    if (type === TypeCalendar.DOUBLE)
+    calendar.presets = this.presets;
+    calendar.endDate = this.end_date;
+    calendar.startDate = this.start_date;
+    calendar.daysArray = this.days_array;
+    calendar.formatInput = this.format.input;
+    calendar.placeholder = this.placeholder;
+    calendar.currentDate = this.current_date;
 
-        // With the attribute spellcheck="false" turn off the spell checking.
-
-        return this.element.append('<div class="dr-input">' +
-            '<div class="dr-dates">' +
-            '<div class="dr-date dr-date-start" contenteditable spellcheck="false">' + moment(this.start_date).format(this.format.input) + '</div>' +
-            '<span class="dr-dates-dash">&ndash;</span>' +
-            '<div class="dr-date dr-date-end" contenteditable spellcheck="false">' + moment(this.end_date).format(this.format.input) + '</div>' +
-            '</div>' +
-
-            (this.presets ? '<div class="dr-presets">' +
-                '<span class="dr-preset-bar"></span>' +
-                '<span class="dr-preset-bar"></span>' +
-                '<span class="dr-preset-bar"></span>' +
-                '</div>' : '') +
-            '</div>' +
-
-            '<div class="dr-selections">' +
-            '<div class="dr-calendar" style="display: none;">' +
-            '<div class="dr-range-switcher">' +
-            '<div class="dr-switcher dr-month-switcher">' +
-            '<i class="dr-left"></i>' +
-            '<span>April</span>' +
-            '<i class="dr-right"></i>' +
-            '</div>' +
-            '<div class="dr-switcher dr-year-switcher">' +
-            '<i class="dr-left"></i>' +
-            '<span>2015</span>' +
-            '<i class="dr-right"></i>' +
-            '</div>' +
-            '</div>' +
-            daysOfTheWeek.outerHTML +
-            '<ul class="dr-day-list"></ul>' +
-            '</div>' +
-            (this.presets ? this.presetCreate()[0].outerHTML : '') +
-            '</div>');
-
-    return this.element.append('<div class="dr-input">' +
-        '<div class="dr-dates">' +
-        '<div class="dr-date" contenteditable placeholder="' + this.placeholder + '">' + (this.settings.current_date ? moment(this.current_date).format(this.format.input) : '') + '</div>' +
-        '</div>' +
-        '</div>' +
-
-        '<div class="dr-selections">' +
-        '<div class="dr-calendar" style="display: none;">' +
-        '<div class="dr-range-switcher">' +
-        '<div class="dr-switcher dr-month-switcher">' +
-        '<i class="dr-left"></i>' +
-        '<span></span>' +
-        '<i class="dr-right"></i>' +
-        '</div>' +
-        '<div class="dr-switcher dr-year-switcher">' +
-        '<i class="dr-left"></i>' +
-        '<span></span>' +
-        '<i class="dr-right"></i>' +
-        '</div>' +
-        '</div>' +
-        daysOfTheWeek.outerHTML +
-        '<ul class="dr-day-list"></ul>' +
-        '</div>' +
-        '</div>');
+    return this.element.append(calendar.provideRangeSwitcherDate());
 }
 
 
