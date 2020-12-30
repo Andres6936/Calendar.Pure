@@ -109,7 +109,7 @@ function Calendar(settings) {
     this.selected = null;
 
     /**
-     * @type {string}
+     * @type {string} Indicate if the type of calendar is 'simple' or 'double'.
      */
     this.type = this.element[0].classList.contains('daterange--single') ? 'single' : 'double';
 
