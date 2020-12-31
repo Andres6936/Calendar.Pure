@@ -83,7 +83,7 @@ class CalendarDouble extends AbstractCalendar {
             });
         }
 
-        presets.forEach(function (item, index) {
+        for (const item of presets) {
             if (moment(item.start).isBefore(self.earliestDate)) {
                 item.start = self.earliestDate;
             }
@@ -104,7 +104,7 @@ class CalendarDouble extends AbstractCalendar {
             ul_presets.append('<li class="dr-list-item">' + item.label +
                 '<span class="dr-item-aside" data-start="' + startISO + '" data-end="' + endISO + '">' + string + '</span>' +
                 '</li>');
-        });
+        }
 
         return ul_presets;
     }
