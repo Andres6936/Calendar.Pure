@@ -39,12 +39,15 @@ class CalendarDouble extends AbstractCalendar {
             daysOfTheWeek.outerHTML +
             '<ul class="dr-day-list"></ul>' +
             '</div>' +
-            (this.presets ? this.providePresetList()[0].outerHTML : '') +
+            (this.presets ? this.providePresetList().outerHTML : '') +
             '</div>';
     }
 
     providePresetList() {
-        const wrapperList = $('<ul class="dr-preset-list" style="display: none;"></ul>');
+        const wrapperList = document.createElement('ul');
+        wrapperList.classList.add('dr-preset-list');
+        wrapperList.style.display = 'none';
+
         const presets = this.settingsPresets !== undefined ? this.settingsPresets :
             [{
                 label: 'Last 30 days',
@@ -98,11 +101,20 @@ class CalendarDouble extends AbstractCalendar {
 
             const startISO = moment(item.start).toISOString();
             const endISO = moment(item.end).toISOString();
-            const string = moment(item.start).format(this.formatPreset) + ' &ndash; ' + moment(item.end).format(this.formatPreset);
+            const string = moment(item.start).format(this.formatPreset) + ' - ' + moment(item.end).format(this.formatPreset);
 
-            wrapperList.append('<li class="dr-list-item">' + item.label +
-                '<span class="dr-item-aside" data-start="' + startISO + '" data-end="' + endISO + '">' + string + '</span>' +
-                '</li>');
+            const listElement = document.createElement('li');
+            listElement.classList.add('dr-list-item');
+            listElement.innerText = item.label;
+
+            const spanElement = document.createElement('span');
+            spanElement.classList.add('dr-item-aside');
+            spanElement.innerText = string;
+            spanElement.dataset.start = startISO;
+            spanElement.dataset.end = endISO;
+
+            listElement.appendChild(spanElement);
+            wrapperList.appendChild(listElement);
         }
 
         return wrapperList;
