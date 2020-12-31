@@ -53,6 +53,8 @@ class CalendarDouble extends AbstractCalendar {
         // @type {HTMLUListElement} Element that store (wrapper) the preset
         const wrapperList = document.createElement('ul');
         wrapperList.classList.add('dr-preset-list');
+        // Make the text unselectable.
+        wrapperList.style.userSelect = 'none';
         wrapperList.style.display = 'none';
 
         // @type {[({start: any, end: any, label: string})]} The list of presets,
