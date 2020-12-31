@@ -101,16 +101,9 @@ class CalendarDouble extends AbstractCalendar {
             const endISO = moment(item.end).toISOString();
             const string = moment(item.start).format(self.formatPreset) + ' &ndash; ' + moment(item.end).format(self.formatPreset);
 
-            if ($('.dr-preset-list', self.element).length) {
-                const item = $('.dr-preset-list .dr-list-item:nth-of-type(' + (index + 1) + ') .dr-item-aside', self.element);
-                item.data('start', startISO);
-                item.data('end', endISO);
-                item.html(string);
-            } else {
-                ul_presets.append('<li class="dr-list-item">' + item.label +
-                    '<span class="dr-item-aside" data-start="' + startISO + '" data-end="' + endISO + '">' + string + '</span>' +
-                    '</li>');
-            }
+            ul_presets.append('<li class="dr-list-item">' + item.label +
+                '<span class="dr-item-aside" data-start="' + startISO + '" data-end="' + endISO + '">' + string + '</span>' +
+                '</li>');
         });
 
         return ul_presets;
