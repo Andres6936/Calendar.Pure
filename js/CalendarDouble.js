@@ -44,7 +44,7 @@ class CalendarDouble extends AbstractCalendar {
     }
 
     providePresetList() {
-        const ul_presets = $('<ul class="dr-preset-list" style="display: none;"></ul>');
+        const wrapperList = $('<ul class="dr-preset-list" style="display: none;"></ul>');
         const presets = typeof this.settingsPresets === 'object' ? this.settingsPresets :
             [{
                 label: 'Last 30 days',
@@ -100,12 +100,12 @@ class CalendarDouble extends AbstractCalendar {
             const endISO = moment(item.end).toISOString();
             const string = moment(item.start).format(this.formatPreset) + ' &ndash; ' + moment(item.end).format(this.formatPreset);
 
-            ul_presets.append('<li class="dr-list-item">' + item.label +
+            wrapperList.append('<li class="dr-list-item">' + item.label +
                 '<span class="dr-item-aside" data-start="' + startISO + '" data-end="' + endISO + '">' + string + '</span>' +
                 '</li>');
         }
 
-        return ul_presets;
+        return wrapperList;
     }
 }
 
