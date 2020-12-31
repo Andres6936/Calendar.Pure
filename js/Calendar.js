@@ -403,81 +403,6 @@ Calendar.prototype.presetToggle = function () {
     this.element.toggleClass('dr-active');
 }
 
-
-Calendar.prototype.presetCreate = function () {
-    const self = this;
-    const ul_presets = $('<ul class="dr-preset-list" style="display: none;"></ul>');
-    const presets = typeof self.settings.presets === 'object' ? self.settings.presets :
-        [{
-            label: 'Last 30 days',
-            start: moment(self.latest_date).subtract(29, 'days'),
-            end: self.latest_date
-        }, {
-            label: 'Last month',
-            start: moment(self.latest_date).subtract(1, 'month').startOf('month'),
-            end: moment(self.latest_date).subtract(1, 'month').endOf('month')
-        }, {
-            label: 'Last 3 months',
-            start: moment(self.latest_date).subtract(3, 'month').startOf('month'),
-            end: moment(self.latest_date).subtract(1, 'month').endOf('month')
-        }, {
-            label: 'Last 6 months',
-            start: moment(self.latest_date).subtract(6, 'month').startOf('month'),
-            end: moment(self.latest_date).subtract(1, 'month').endOf('month')
-        }, {
-            label: 'Last year',
-            start: moment(self.latest_date).subtract(1, 'year').startOf('year'),
-            end: moment(self.latest_date).subtract(1, 'year').endOf('year')
-        }, {
-            label: 'All time',
-            start: self.earliest_date,
-            end: self.latest_date
-        }];
-
-    if (moment(self.latest_date).diff(moment(self.latest_date).startOf('month'), 'days') >= 6 &&
-        typeof self.settings.presets !== 'object'
-    ) {
-        presets.splice(1, 0, {
-            label: 'This month',
-            start: moment(self.latest_date).startOf('month'),
-            end: self.latest_date
-        });
-    }
-
-    $.each(presets, function (i, d) {
-        if (moment(d.start).isBefore(self.earliest_date)) {
-            d.start = self.earliest_date;
-        }
-        if (moment(d.start).isAfter(self.latest_date)) {
-            d.start = self.latest_date;
-        }
-        if (moment(d.end).isBefore(self.earliest_date)) {
-            d.end = self.earliest_date;
-        }
-        if (moment(d.end).isAfter(self.latest_date)) {
-            d.end = self.latest_date;
-        }
-
-        const startISO = moment(d.start).toISOString();
-        const endISO = moment(d.end).toISOString();
-        const string = moment(d.start).format(self.format.preset) + ' &ndash; ' + moment(d.end).format(self.format.preset);
-
-        if ($('.dr-preset-list', self.element).length) {
-            const item = $('.dr-preset-list .dr-list-item:nth-of-type(' + (i + 1) + ') .dr-item-aside', self.element);
-            item.data('start', startISO);
-            item.data('end', endISO);
-            item.html(string);
-        } else {
-            ul_presets.append('<li class="dr-list-item">' + d.label +
-                '<span class="dr-item-aside" data-start="' + startISO + '" data-end="' + endISO + '">' + string + '</span>' +
-                '</li>');
-        }
-    });
-
-    return ul_presets;
-}
-
-
 Calendar.prototype.calendarSetDates = function () {
     $('.dr-date-start', this.element).html(moment(this.start_date).format(this.format.input));
     $('.dr-date-end', this.element).html(moment(this.end_date).format(this.format.input));
@@ -867,8 +792,12 @@ Calendar.prototype.calendarHTML = function (type) {
     calendar.startDate = this.start_date;
     calendar.daysArray = this.days_array;
     calendar.formatInput = this.format.input;
+    calendar.latestDate = this.latest_date;
     calendar.placeholder = this.placeholder;
     calendar.currentDate = this.current_date;
+    calendar.earliestDate = this.earliest_date;
+    calendar.formatPreset = this.format.preset;
+    calendar.settingsPresets = this.settings.presets;
 
     return this.element.append(calendar.provideRangeSwitcherDate());
 }

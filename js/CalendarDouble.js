@@ -39,8 +39,81 @@ class CalendarDouble extends AbstractCalendar {
             daysOfTheWeek.outerHTML +
             '<ul class="dr-day-list"></ul>' +
             '</div>' +
-            (this.presets ? this.presetCreate()[0].outerHTML : '') +
+            (this.presets ? this.providePresetList()[0].outerHTML : '') +
             '</div>';
+    }
+
+    providePresetList() {
+        const self = this;
+        const ul_presets = $('<ul class="dr-preset-list" style="display: none;"></ul>');
+        const presets = typeof this.settingsPresets === 'object' ? this.settingsPresets :
+            [{
+                label: 'Last 30 days',
+                start: moment(this.latestDate).subtract(29, 'days'),
+                end: this.latestDate
+            }, {
+                label: 'Last month',
+                start: moment(this.latestDate).subtract(1, 'month').startOf('month'),
+                end: moment(this.latestDate).subtract(1, 'month').endOf('month')
+            }, {
+                label: 'Last 3 months',
+                start: moment(this.latestDate).subtract(3, 'month').startOf('month'),
+                end: moment(this.latestDate).subtract(1, 'month').endOf('month')
+            }, {
+                label: 'Last 6 months',
+                start: moment(this.latestDate).subtract(6, 'month').startOf('month'),
+                end: moment(this.latestDate).subtract(1, 'month').endOf('month')
+            }, {
+                label: 'Last year',
+                start: moment(this.latestDate).subtract(1, 'year').startOf('year'),
+                end: moment(this.latestDate).subtract(1, 'year').endOf('year')
+            }, {
+                label: 'All time',
+                start: this.earliestDate,
+                end: this.latestDate
+            }];
+
+        if (moment(this.latestDate).diff(moment(this.latestDate).startOf('month'), 'days') >= 6 &&
+            typeof this.settingsPresets !== 'object'
+        ) {
+            presets.splice(1, 0, {
+                label: 'This month',
+                start: moment(this.latestDate).startOf('month'),
+                end: this.latestDate
+            });
+        }
+
+        $.each(presets, function (i, d) {
+            if (moment(d.start).isBefore(this.earliestDate)) {
+                d.start = this.earliestDate;
+            }
+            if (moment(d.start).isAfter(this.latestDate)) {
+                d.start = this.latestDate;
+            }
+            if (moment(d.end).isBefore(this.earliestDate)) {
+                d.end = this.earliestDate;
+            }
+            if (moment(d.end).isAfter(this.latestDate)) {
+                d.end = this.latestDate;
+            }
+
+            const startISO = moment(d.start).toISOString();
+            const endISO = moment(d.end).toISOString();
+            const string = moment(d.start).format(this.formatPreset) + ' &ndash; ' + moment(d.end).format(this.formatPreset);
+
+            if ($('.dr-preset-list', self.element).length) {
+                const item = $('.dr-preset-list .dr-list-item:nth-of-type(' + (i + 1) + ') .dr-item-aside', self.element);
+                item.data('start', startISO);
+                item.data('end', endISO);
+                item.html(string);
+            } else {
+                ul_presets.append('<li class="dr-list-item">' + d.label +
+                    '<span class="dr-item-aside" data-start="' + startISO + '" data-end="' + endISO + '">' + string + '</span>' +
+                    '</li>');
+            }
+        });
+
+        return ul_presets;
     }
 }
 

@@ -20,11 +20,19 @@ class AbstractCalendar {
 
     #_daysArray = undefined;
 
+    #_latestDate = undefined;
+
     #_formatInput = undefined;
 
     #_placeholder = undefined;
 
     #_currentDate = undefined;
+
+    #_earliestDate = undefined;
+
+    #_formatPreset = undefined;
+
+    #_settingsPresets = undefined;
 
     // Construct
 
@@ -85,6 +93,10 @@ class AbstractCalendar {
         this.#_daysArray = value;
     }
 
+    set latestDate(value) {
+        this.#_latestDate = value;
+    }
+
     set formatInput(value) {
         this.#_formatInput = value;
     }
@@ -97,7 +109,19 @@ class AbstractCalendar {
         this.#_currentDate = value;
     }
 
-    // Getters
+    set earliestDate(value) {
+        this.#_earliestDate = value;
+    }
+
+    set formatPreset(value) {
+        this.#_formatPreset = value;
+    }
+
+    set settingsPresets(value) {
+        this.#_settingsPresets = value;
+    }
+
+// Getters
 
     get presets() {
         return this.#_presets;
@@ -115,6 +139,10 @@ class AbstractCalendar {
         return this.#_daysArray;
     }
 
+    get latestDate() {
+        return this.#_latestDate;
+    }
+
     get formatInput() {
         return this.#_formatInput;
     }
@@ -125,6 +153,18 @@ class AbstractCalendar {
 
     get currentDate() {
         return this.#_currentDate;
+    }
+
+    get earliestDate() {
+        return this.#_earliestDate;
+    }
+
+    get formatPreset() {
+        return this.#_formatPreset;
+    }
+
+    get settingsPresets() {
+        return this.#_settingsPresets;
     }
 }
 
