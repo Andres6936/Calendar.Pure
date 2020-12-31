@@ -405,9 +405,9 @@ Calendar.prototype.presetToggle = function () {
 
 
 Calendar.prototype.presetCreate = function () {
-    var self = this;
-    var ul_presets = $('<ul class="dr-preset-list" style="display: none;"></ul>');
-    var presets = typeof self.settings.presets === 'object' ? self.settings.presets :
+    const self = this;
+    const ul_presets = $('<ul class="dr-preset-list" style="display: none;"></ul>');
+    const presets = typeof self.settings.presets === 'object' ? self.settings.presets :
         [{
             label: 'Last 30 days',
             start: moment(self.latest_date).subtract(29, 'days'),
@@ -458,12 +458,12 @@ Calendar.prototype.presetCreate = function () {
             d.end = self.latest_date;
         }
 
-        var startISO = moment(d.start).toISOString();
-        var endISO = moment(d.end).toISOString();
-        var string = moment(d.start).format(self.format.preset) + ' &ndash; ' + moment(d.end).format(self.format.preset);
+        const startISO = moment(d.start).toISOString();
+        const endISO = moment(d.end).toISOString();
+        const string = moment(d.start).format(self.format.preset) + ' &ndash; ' + moment(d.end).format(self.format.preset);
 
         if ($('.dr-preset-list', self.element).length) {
-            var item = $('.dr-preset-list .dr-list-item:nth-of-type(' + (i + 1) + ') .dr-item-aside', self.element);
+            const item = $('.dr-preset-list .dr-list-item:nth-of-type(' + (i + 1) + ') .dr-item-aside', self.element);
             item.data('start', startISO);
             item.data('end', endISO);
             item.html(string);
