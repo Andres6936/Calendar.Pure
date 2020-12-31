@@ -12,27 +12,27 @@ class AbstractCalendar {
 
     // Properties
 
-    #_presets = undefined;
+    presets = undefined;
 
-    #_endDate = undefined;
+    endDate = undefined;
 
-    #_startDate = undefined;
+    startDate = undefined;
 
-    #_daysArray = undefined;
+    daysArray = undefined;
 
-    #_latestDate = undefined;
+    latestDate = undefined;
 
-    #_formatInput = undefined;
+    formatInput = undefined;
 
-    #_placeholder = undefined;
+    placeholder = undefined;
 
-    #_currentDate = undefined;
+    currentDate = undefined;
 
-    #_earliestDate = undefined;
+    earliestDate = undefined;
 
-    #_formatPreset = undefined;
+    formatPreset = undefined;
 
-    #_settingsPresets = undefined;
+    settingsPresets = undefined;
 
     // Construct
 
@@ -73,98 +73,6 @@ class AbstractCalendar {
         }
 
         return daysOfTheWeek;
-    }
-
-    // Setters
-
-    set presets(value) {
-        this.#_presets = value;
-    }
-
-    set endDate(value) {
-        this.#_endDate = value;
-    }
-
-    set startDate(value) {
-        this.#_startDate = value;
-    }
-
-    set daysArray(value) {
-        this.#_daysArray = value;
-    }
-
-    set latestDate(value) {
-        this.#_latestDate = value;
-    }
-
-    set formatInput(value) {
-        this.#_formatInput = value;
-    }
-
-    set placeholder(value) {
-        this.#_placeholder = value;
-    }
-
-    set currentDate(value) {
-        this.#_currentDate = value;
-    }
-
-    set earliestDate(value) {
-        this.#_earliestDate = value;
-    }
-
-    set formatPreset(value) {
-        this.#_formatPreset = value;
-    }
-
-    set settingsPresets(value) {
-        this.#_settingsPresets = value;
-    }
-
-// Getters
-
-    get presets() {
-        return this.#_presets;
-    }
-
-    get endDate() {
-        return this.#_endDate;
-    }
-
-    get startDate() {
-        return this.#_startDate;
-    }
-
-    get daysArray() {
-        return this.#_daysArray;
-    }
-
-    get latestDate() {
-        return this.#_latestDate;
-    }
-
-    get formatInput() {
-        return this.#_formatInput;
-    }
-
-    get placeholder() {
-        return this.#_placeholder;
-    }
-
-    get currentDate() {
-        return this.#_currentDate;
-    }
-
-    get earliestDate() {
-        return this.#_earliestDate;
-    }
-
-    get formatPreset() {
-        return this.#_formatPreset;
-    }
-
-    get settingsPresets() {
-        return this.#_settingsPresets;
     }
 }
 
