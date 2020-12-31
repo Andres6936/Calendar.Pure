@@ -44,7 +44,6 @@ class CalendarDouble extends AbstractCalendar {
     }
 
     providePresetList() {
-        const self = this;
         const ul_presets = $('<ul class="dr-preset-list" style="display: none;"></ul>');
         const presets = typeof this.settingsPresets === 'object' ? this.settingsPresets :
             [{
@@ -84,22 +83,22 @@ class CalendarDouble extends AbstractCalendar {
         }
 
         for (const item of presets) {
-            if (moment(item.start).isBefore(self.earliestDate)) {
-                item.start = self.earliestDate;
+            if (moment(item.start).isBefore(this.earliestDate)) {
+                item.start = this.earliestDate;
             }
-            if (moment(item.start).isAfter(self.latestDate)) {
-                item.start = self.latestDate;
+            if (moment(item.start).isAfter(this.latestDate)) {
+                item.start = this.latestDate;
             }
-            if (moment(item.end).isBefore(self.earliestDate)) {
-                item.end = self.earliestDate;
+            if (moment(item.end).isBefore(this.earliestDate)) {
+                item.end = this.earliestDate;
             }
-            if (moment(item.end).isAfter(self.latestDate)) {
-                item.end = self.latestDate;
+            if (moment(item.end).isAfter(this.latestDate)) {
+                item.end = this.latestDate;
             }
 
             const startISO = moment(item.start).toISOString();
             const endISO = moment(item.end).toISOString();
-            const string = moment(item.start).format(self.formatPreset) + ' &ndash; ' + moment(item.end).format(self.formatPreset);
+            const string = moment(item.start).format(this.formatPreset) + ' &ndash; ' + moment(item.end).format(this.formatPreset);
 
             ul_presets.append('<li class="dr-list-item">' + item.label +
                 '<span class="dr-item-aside" data-start="' + startISO + '" data-end="' + endISO + '">' + string + '</span>' +
