@@ -43,11 +43,20 @@ class CalendarDouble extends AbstractCalendar {
             '</div>';
     }
 
+    /**
+     * Create and return a list html with the presets.
+     *
+     * @return {HTMLUListElement} Element type UL, that have store (wrapper)
+     * elements that represent each of presets.
+     */
     providePresetList() {
+        // @type {HTMLUListElement} Element that store (wrapper) the preset
         const wrapperList = document.createElement('ul');
         wrapperList.classList.add('dr-preset-list');
         wrapperList.style.display = 'none';
 
+        // @type {[({start: any, end: any, label: string})]} The list of presets,
+        //  each preset store: a label, a start date and end date.
         const presets = this.settingsPresets !== undefined ? this.settingsPresets :
             [{
                 label: 'Last 30 days',
@@ -99,14 +108,19 @@ class CalendarDouble extends AbstractCalendar {
                 item.end = this.latestDate;
             }
 
+            // @type {string} The start date
             const startISO = moment(item.start).toISOString();
+            // @type {string} The end date
             const endISO = moment(item.end).toISOString();
+            // @type {string} The label with the format: 'start date - end date'
             const string = moment(item.start).format(this.formatPreset) + ' - ' + moment(item.end).format(this.formatPreset);
 
+            // @type {HTMLLIElement} Represent the element
             const listElement = document.createElement('li');
             listElement.classList.add('dr-list-item');
             listElement.innerText = item.label;
 
+            // @type {HTMLSpanElement} Repesent the label with the format
             const spanElement = document.createElement('span');
             spanElement.classList.add('dr-item-aside');
             spanElement.innerText = string;
