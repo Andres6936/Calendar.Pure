@@ -45,7 +45,7 @@ class CalendarDouble extends AbstractCalendar {
 
     providePresetList() {
         const wrapperList = $('<ul class="dr-preset-list" style="display: none;"></ul>');
-        const presets = typeof this.settingsPresets === 'object' ? this.settingsPresets :
+        const presets = this.settingsPresets !== undefined ? this.settingsPresets :
             [{
                 label: 'Last 30 days',
                 start: moment(this.latestDate).subtract(29, 'days'),
