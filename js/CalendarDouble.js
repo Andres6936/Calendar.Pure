@@ -17,6 +17,7 @@ class CalendarDouble extends AbstractCalendar {
 
             const divStartDate = document.createElement('div');
             divStartDate.innerText = moment(this.startDate).format(this.formatInput);
+            // With the attribute spellcheck="false" turn off the spell checking.
             divStartDate.setAttribute('spellcheck', 'false');
             divStartDate.classList.add('dr-date-start');
             divStartDate.classList.add('dr-date');
@@ -27,6 +28,7 @@ class CalendarDouble extends AbstractCalendar {
 
             const divEndDate = document.createElement('div');
             divEndDate.innerText = moment(this.endDate).format(this.formatInput);
+            // With the attribute spellcheck="false" turn off the spell checking.
             divEndDate.setAttribute('spellcheck', 'false');
             divEndDate.classList.add('dr-date-end');
             divEndDate.classList.add('dr-date');
@@ -51,28 +53,66 @@ class CalendarDouble extends AbstractCalendar {
             divInput.appendChild(divPresets);
         }
 
-        // With the attribute spellcheck="false" turn off the spell checking.
-        return divInput.outerHTML +
+        // Next Section
 
-            '<div class="dr-selections">' +
-            '<div class="dr-calendar" style="display: none;">' +
-            '<div class="dr-range-switcher">' +
-            '<div class="dr-switcher dr-month-switcher">' +
-            '<i class="dr-left"></i>' +
-            '<span>April</span>' +
-            '<i class="dr-right"></i>' +
-            '</div>' +
-            '<div class="dr-switcher dr-year-switcher">' +
-            '<i class="dr-left"></i>' +
-            '<span>2015</span>' +
-            '<i class="dr-right"></i>' +
-            '</div>' +
-            '</div>' +
-            daysOfTheWeek.outerHTML +
-            '<ul class="dr-day-list"></ul>' +
-            '</div>' +
-            (this.presets ? this.providePresetList().outerHTML : '') +
-            '</div>';
+        const divSelections = document.createElement('div');
+        divSelections.classList.add('dr-selections');
+
+        // Begin RAII block
+        {
+            const divCalendar = document.createElement('div');
+            divCalendar.classList.add('dr-calendar');
+            divCalendar.style.display = 'none';
+
+            const divRangeSwitcher = document.createElement('div');
+            divRangeSwitcher.classList.add('dr-range-switcher');
+
+            const divMonthSwitcher = document.createElement('div');
+            divMonthSwitcher.classList.add('dr-month-switcher');
+            divMonthSwitcher.classList.add('dr-switcher');
+
+            const elementLeft = document.createElement('i');
+            elementLeft.classList.add('dr-left');
+
+            const spanTextApril = document.createElement('span');
+            spanTextApril.innerText = 'April';
+
+            const elementRight = document.createElement('i');
+            elementRight.classList.add('dr-right');
+
+            const divYearSwitcher = document.createElement('div');
+            divYearSwitcher.classList.add('dr-year-switcher');
+            divYearSwitcher.classList.add('dr-switcher');
+
+            const spanText2015 = document.createElement('span');
+            spanText2015.innerText = '2015';
+
+            const ulDayList = document.createElement('ul');
+            ulDayList.classList.add('dr-day-list');
+
+            divMonthSwitcher.appendChild(elementLeft);
+            divMonthSwitcher.appendChild(spanTextApril);
+            divMonthSwitcher.appendChild(elementRight);
+
+            divYearSwitcher.appendChild(elementLeft);
+            divYearSwitcher.appendChild(spanText2015);
+            divYearSwitcher.appendChild(elementRight);
+
+            divRangeSwitcher.appendChild(divMonthSwitcher);
+            divRangeSwitcher.appendChild(divYearSwitcher);
+
+            divCalendar.appendChild(divRangeSwitcher);
+            divCalendar.appendChild(daysOfTheWeek);
+            divCalendar.appendChild(ulDayList);
+
+            divSelections.appendChild(divCalendar);
+
+            if (this.presets) {
+                divSelections.appendChild(this.providePresetList());
+            }
+        }
+
+        return divInput.outerHTML + divSelections.outerHTML;
     }
 
     /**
