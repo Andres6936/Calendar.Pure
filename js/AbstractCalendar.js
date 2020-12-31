@@ -16,6 +16,8 @@ class AbstractCalendar {
 
     endDate = undefined;
 
+    selector = undefined;
+
     startDate = undefined;
 
     daysArray = undefined;

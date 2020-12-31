@@ -1,82 +1,9 @@
 'use strict';
 
-import {TypeCalendar, TypeToggle} from "./Enums.js";
+import {SelectorHTML} from "./SelectorHTML.js";
 import {CalendarSingle} from "./CalendarSingle.js";
 import {CalendarDouble} from "./CalendarDouble.js";
-
-class SelectorHTML {
-    // Properties
-
-    /**
-     * @type {Element} Reference private to Html Element
-     */
-    #element = undefined
-
-    // Construct
-
-    /**
-     * @param _element {Element} Reference to Html Element
-     */
-    constructor(_element) {
-        console.assert(typeof _element === 'object');
-
-        this.#element = _element
-    }
-
-    // Methods
-
-    /**
-     * Wrapper around of selector of elements with specify class name and
-     * filter of elements with the tag name.
-     *
-     * This method is created with the intention of replace the function of
-     * jQuery that filter for class name and return the collection of elements
-     * with the tag specified.
-     *
-     * Equivalent jQuery: $('className' 'tagName')
-     *
-     * Requirement: The element select by class name should be exist and be
-     * unique.
-     *
-     * @param className {string} Name of class that filter the elements.
-     * @param tagName {string} Name of tag for filter the elements.
-     * @return {HTMLCollection} Collection of elements.
-     */
-    filterClassGetByTag(className, tagName) {
-        console.assert(typeof className === 'string');
-        console.assert(typeof tagName === 'string');
-
-        const selection = this.#element.getElementsByClassName(className)[0];
-        return selection.getElementsByTagName(tagName);
-    }
-
-    /**
-     * @param className {string} Name of class that filter the elements.
-     * @throws Error If not elements found with the className specify.
-     * @return {HTMLCollectionOf<Element>} Collection of elements.
-     */
-    filterClass(className) {
-        console.assert(typeof className === 'string');
-
-        const selection = this.#element.getElementsByClassName(className);
-        if (selection.length === 0) {
-            throw new Error(`Not elements found with the class: ${className}`);
-        }
-        return selection;
-    }
-
-    /**
-     * @param className {string} Name of class that filter the elements.
-     * @throws Error If the element with the class not exist.
-     * @return {Element}
-     */
-    getFirstByClass(className) {
-        // @type {HTMLCollectionOf<HTMLElement>}
-        const result = this.#element.getElementsByClassName(className);
-        if (result.length === 0) throw new Error('Empty Collection');
-        return result[0];
-    }
-}
+import {TypeCalendar, TypeToggle} from "./Enums.js";
 
 function Calendar(settings) {
     const self = this;
@@ -167,10 +94,10 @@ function Calendar(settings) {
 
     this.callback = settings.callback || this.calendarSetDates;
 
-    this.calendarHTML(this.type);
-
     // Wrapper to class, for reduce the dependency of jQuery
     const selector = new SelectorHTML(this.element[0]);
+
+    this.calendarHTML(this.type, selector);
 
     try {
         selector.getFirstByClass('dr-presets').onclick = function () {
@@ -775,8 +702,9 @@ Calendar.prototype.calendarArray = function (start, end, current, switcher) {
 
 /**
  * @param type {string|TypeCalendar} If the calendar is of type SINGLE or DOUBLE.
+ * @param selector {SelectorHTML} The HTML wrapper that content all the code of Calendar.
  */
-Calendar.prototype.calendarHTML = function (type) {
+Calendar.prototype.calendarHTML = function (type, selector) {
     let calendar = undefined;
 
     if (type === TypeCalendar.SINGLE) {
@@ -789,6 +717,7 @@ Calendar.prototype.calendarHTML = function (type) {
 
     calendar.presets = this.presets;
     calendar.endDate = this.end_date;
+    calendar.selector = selector;
     calendar.startDate = this.start_date;
     calendar.daysArray = this.days_array;
     calendar.formatInput = this.format.input;
