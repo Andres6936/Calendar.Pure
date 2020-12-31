@@ -12,6 +12,9 @@ class AbstractCalendar {
 
     // Properties
 
+    /**
+     * @type {boolean} Determine if the Calendar must be show the date presets.
+     */
     presets = undefined;
 
     endDate = undefined;
