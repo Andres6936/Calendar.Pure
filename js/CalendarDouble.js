@@ -83,31 +83,31 @@ class CalendarDouble extends AbstractCalendar {
             });
         }
 
-        $.each(presets, function (i, d) {
-            if (moment(d.start).isBefore(this.earliestDate)) {
-                d.start = this.earliestDate;
+        presets.forEach(function (item, index) {
+            if (moment(item.start).isBefore(self.earliestDate)) {
+                item.start = self.earliestDate;
             }
-            if (moment(d.start).isAfter(this.latestDate)) {
-                d.start = this.latestDate;
+            if (moment(item.start).isAfter(self.latestDate)) {
+                item.start = self.latestDate;
             }
-            if (moment(d.end).isBefore(this.earliestDate)) {
-                d.end = this.earliestDate;
+            if (moment(item.end).isBefore(self.earliestDate)) {
+                item.end = self.earliestDate;
             }
-            if (moment(d.end).isAfter(this.latestDate)) {
-                d.end = this.latestDate;
+            if (moment(item.end).isAfter(self.latestDate)) {
+                item.end = self.latestDate;
             }
 
-            const startISO = moment(d.start).toISOString();
-            const endISO = moment(d.end).toISOString();
-            const string = moment(d.start).format(this.formatPreset) + ' &ndash; ' + moment(d.end).format(this.formatPreset);
+            const startISO = moment(item.start).toISOString();
+            const endISO = moment(item.end).toISOString();
+            const string = moment(item.start).format(self.formatPreset) + ' &ndash; ' + moment(item.end).format(self.formatPreset);
 
             if ($('.dr-preset-list', self.element).length) {
-                const item = $('.dr-preset-list .dr-list-item:nth-of-type(' + (i + 1) + ') .dr-item-aside', self.element);
+                const item = $('.dr-preset-list .dr-list-item:nth-of-type(' + (index + 1) + ') .dr-item-aside', self.element);
                 item.data('start', startISO);
                 item.data('end', endISO);
                 item.html(string);
             } else {
-                ul_presets.append('<li class="dr-list-item">' + d.label +
+                ul_presets.append('<li class="dr-list-item">' + item.label +
                     '<span class="dr-item-aside" data-start="' + startISO + '" data-end="' + endISO + '">' + string + '</span>' +
                     '</li>');
             }
