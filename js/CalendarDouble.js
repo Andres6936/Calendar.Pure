@@ -7,20 +7,52 @@ class CalendarDouble extends AbstractCalendar {
 
         const daysOfTheWeek = this.provideDaysOfTheWeek();
 
-        // With the attribute spellcheck="false" turn off the spell checking.
-        return '<div class="dr-input">' +
-            '<div class="dr-dates">' +
-            '<div class="dr-date dr-date-start" contenteditable spellcheck="false">' + moment(this.startDate).format(this.formatInput) + '</div>' +
-            '<span class="dr-dates-dash">&ndash;</span>' +
-            '<div class="dr-date dr-date-end" contenteditable spellcheck="false">' + moment(this.endDate).format(this.formatInput) + '</div>' +
-            '</div>' +
+        const divInput = document.createElement('div');
+        divInput.classList.add('dr-input');
 
-            (this.presets ? '<div class="dr-presets">' +
-                '<span class="dr-preset-bar"></span>' +
-                '<span class="dr-preset-bar"></span>' +
-                '<span class="dr-preset-bar"></span>' +
-                '</div>' : '') +
-            '</div>' +
+        // Begin RAII block
+        {
+            const divDates = document.createElement('div');
+            divDates.classList.add('dr-dates');
+
+            const divStartDate = document.createElement('div');
+            divStartDate.innerText = moment(this.startDate).format(this.formatInput);
+            divStartDate.setAttribute('spellcheck', 'false');
+            divStartDate.classList.add('dr-date-start');
+            divStartDate.classList.add('dr-date');
+
+            const divDashDate = document.createElement('span');
+            divDashDate.classList.add('dr-dates-dash');
+            divDashDate.innerText = '-';
+
+            const divEndDate = document.createElement('div');
+            divEndDate.innerText = moment(this.endDate).format(this.formatInput);
+            divEndDate.setAttribute('spellcheck', 'false');
+            divEndDate.classList.add('dr-date-end');
+            divEndDate.classList.add('dr-date');
+
+            divDates.appendChild(divStartDate);
+            divDates.appendChild(divDashDate);
+            divDates.appendChild(divEndDate);
+
+            divInput.appendChild(divDates);
+        }
+
+        if (this.presets) {
+            const divPresets = document.createElement('div');
+            divPresets.classList.add('dr-presets');
+
+            for (let i = 0; i < 3; i += 1) {
+                const spanDash = document.createElement('span');
+                spanDash.classList.add('dr-preset-bar');
+                divPresets.appendChild(spanDash);
+            }
+
+            divInput.appendChild(divPresets);
+        }
+
+        // With the attribute spellcheck="false" turn off the spell checking.
+        return divInput.outerHTML +
 
             '<div class="dr-selections">' +
             '<div class="dr-calendar" style="display: none;">' +
