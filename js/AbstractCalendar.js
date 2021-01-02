@@ -17,6 +17,9 @@ class AbstractCalendar {
      */
     presets = undefined;
 
+    /**
+     * The end date for default.
+     */
     endDate = undefined;
 
     /**
@@ -24,6 +27,9 @@ class AbstractCalendar {
      */
     selector = undefined;
 
+    /**
+     * The start date for default.
+     */
     startDate = undefined;
 
     daysArray = undefined;
@@ -49,6 +55,10 @@ class AbstractCalendar {
      */
     formatPreset = undefined;
 
+    /**
+     *
+     * @type {[({start: any, end: any, label: string})]} The list of presets for default that user provided.
+     */
     settingsPresets = undefined;
 
     // Construct
