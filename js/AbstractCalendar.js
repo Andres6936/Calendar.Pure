@@ -19,6 +19,9 @@ class AbstractCalendar {
 
     endDate = undefined;
 
+    /**
+     * Wrapper to the HTML element that controller and show the Calendar.
+     */
     selector = undefined;
 
     startDate = undefined;
@@ -27,14 +30,23 @@ class AbstractCalendar {
 
     latestDate = undefined;
 
+    /**
+     * @type {string} Determine the format that must be have the start and end date.
+     */
     formatInput = undefined;
 
+    /**
+     * @type {string} Determine the placeholder text for the Single Calendar.
+     */
     placeholder = undefined;
 
     currentDate = undefined;
 
     earliestDate = undefined;
 
+    /**
+     * @type {string} Determine the format must be have each preset date.
+     */
     formatPreset = undefined;
 
     settingsPresets = undefined;
